@@ -1,0 +1,69 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/kali-tools-kali.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "install",
+        " auto=true",
+        " priority=critical",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " -- ",
+        "<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 51200,
+      "guest_os_type": "debian8-64",
+      "headless": false,
+      "http_directory": "http",
+      "iso_urls": [
+        "kali-linux-2016.2-amd64.iso",
+        "http://cdimage.kali.org/kali-2016.2/kali-linux-2016.2-amd64.iso"
+      ],
+      "iso_checksum_type": "sha1",
+      "iso_checksum": "25cc6d53a8bd8886fcb468eb4fbb4cdfac895c65",
+      "output_directory": "Kali_64-bit.vmwarevm",
+      "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
+      "ssh_password": "password",
+      "ssh_port": 22,
+      "ssh_username": "root",
+      "ssh_wait_timeout": "10000s",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "{{.Flavor}}.iso",
+      "vm_name": "Kali_64-bit",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "2048",
+        "numvcpus": "2"
+      }
+    }
+  ],
+  "post-processors": [
+    [
+      { 
+        "inline": [
+          "vmrun -T fusion snapshot Kali_64-bit.vmwarevm/Kali_64-bit.vmx Installed"
+        ],
+        "type": "shell-local"
+      }
+    ]
+ ]  
+}
