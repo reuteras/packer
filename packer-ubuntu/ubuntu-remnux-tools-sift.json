@@ -1,0 +1,74 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/remnux-tools-sift.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/remnux-tools-cleanup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/config.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "install",
+        " auto=true",
+        " priority=critical",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " -- ",
+        "<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 51200,
+      "guest_os_type": "ubuntu-64",
+      "headless": false,
+      "http_directory": "http",
+      "iso_urls": [
+        "iso/mini.iso",
+        "http://archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/20101020ubuntu318.41/images/netboot/mini.iso"
+      ],
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "84b0350a2ea7bb1ea1b767f628f3b1440cec50c80b5ba4053389902259d448ed",
+      "output_directory": "Ubuntu_SIFT_64-bit.vmwarevm",
+      "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
+      "ssh_password": "password",
+      "ssh_port": 22,
+      "ssh_username": "malware",
+      "ssh_wait_timeout": "10000s",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "{{.Flavor}}.iso",
+      "vm_name": "Ubuntu_SIFT_64-bit",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "4096",
+        "numvcpus": "2"
+      }
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "inline": [
+          "vmrun -T fusion snapshot Ubuntu_SIFT_64-bit.vmwarevm/Ubuntu_SIFT_64-bit.vmx Installed"
+        ],
+        "type": "shell-local"
+      }
+    ]
+ ]
+}
