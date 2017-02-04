@@ -25,6 +25,10 @@ Available in **packer-ubuntu** and has three targets:
 
 * kali - kali.json - my script [kali-tools](https://github.com/reuteras/kali-tools) to do a very basic install of [Kali](https://www.kali.org).
 
+### Manual steps
+
+At the moment you have to add a usb controller manually.
+
 ### TODO
 
 Create configurations for
