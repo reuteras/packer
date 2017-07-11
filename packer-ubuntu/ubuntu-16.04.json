@@ -15,20 +15,15 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname=ubuntu ",
-        "grub-installer/bootdev=/dev/sda<wait> ",
-        "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
-        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-        "passwd/user-fullname=malware ",
-        "passwd/user-password=password ",
-        "passwd/user-password-again=password ",
-        "passwd/username=malware ",
-        "initrd=/install/initrd.gz -- <wait><enter>" 
+        "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "install",
+        " auto=true",
+        " priority=critical",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " grub-installer/bootdev=/dev/sda",
+        " initrd=/install/initrd.gz",
+        " -- ",
+        "<enter>"
       ],
       "boot_wait": "10s",
       "disk_size": 51200,
@@ -37,7 +32,7 @@
       "http_directory": "http",
       "iso_urls": [
         "iso/mini.iso",
-        "http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-amd64.iso"
+        "http://releases.ubuntu.com/16.04/ubuntu-16.04.2-server-amd64.iso"
       ],
       "iso_checksum_type": "sha256",
       "iso_checksum": "737ae7041212c628de5751d15c3016058b0e833fdc32e7420209b76ca3d0a535",
