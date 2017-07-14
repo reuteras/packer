@@ -1,4 +1,5 @@
 all: sift remnux
+ubuntu: ubuntu-16.04
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -8,9 +9,9 @@ sift:
 	packer validate ubuntu-remnux-tools-sift.json
 	packer build ubuntu-remnux-tools-sift.json
 
-ubuntu:
-	packer validate ubuntu.json
-	packer build ubuntu.json
+ubuntu-14.04:
+	packer validate ubuntu-14.04.json
+	packer build ubuntu-14.04.json
 
 ubuntu-16.04:
 	packer validate ubuntu-16.04.json
@@ -25,8 +26,8 @@ debug-sift:
 	packer build -on-error=abort ubuntu-remnux-tools-sift.json
 
 debug-ubuntu:
-	packer validate ubuntu.json
-	packer build -on-error=abort ubuntu.json
+	packer validate ubuntu-14.04.json
+	packer build -on-error=abort ubuntu-14.04.json
 
 debug-ubuntu-16.04:
 	packer validate ubuntu-16.04.json
