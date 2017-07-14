@@ -4,7 +4,7 @@ if [[ ! -d ~/.config ]]; then
     mkdir ~/.config
 fi
 
-cat << EOF > ~/.config/monitor.xml
+cat << EOF > ~/.config/monitors.xml
 <monitors version="1">
   <configuration>
       <clone>no</clone>
@@ -12,8 +12,8 @@ cat << EOF > ~/.config/monitor.xml
           <vendor>???</vendor>
           <product>0x0000</product>
           <serial>0x00000000</serial>
-          <width>1440</width>
-          <height>900</height>
+          <width>1400</width>
+          <height>1050</height>
           <rate>60</rate>
           <x>0</x>
           <y>0</y>
