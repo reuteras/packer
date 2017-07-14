@@ -1,3 +1,8 @@
+#!/bin/bash
+
+if [[ ! -d ~/.config ]]; then
+    mkdir ~/.config
+fi
 
 cat << EOF > ~/.config/monitor.xml
 <monitors version="1">

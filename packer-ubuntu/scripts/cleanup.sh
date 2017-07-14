@@ -5,7 +5,7 @@ rm -f /home/malware/*.sh
 rm -f /home/malware/linux.iso
 
 # Clean
-sudo apt-get -y autoremove
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq autoremove
 sudo apt-get autoclean
 sudo apt-get clean
 
