@@ -24,6 +24,7 @@ install:
 clean:
 	rm -rf Debian_Cuckoo_64-bit.vmwarevm
 	rm -rf Debian_64-bit.vmwarevm
+	rm -rf Debian_9_64-bit.vmwarevm
 
 dist-clean:
 	make clean
