@@ -26,6 +26,7 @@
         " auto=true",
         " priority=critical",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " grub-installer/bootdev=/dev/sda",
         " -- ",
         "<enter>"
       ],
@@ -35,11 +36,11 @@
       "headless": false,
       "http_directory": "http",
       "iso_urls": [
-        "kali-linux-2016.2-amd64.iso",
-        "http://cdimage.kali.org/kali-2016.2/kali-linux-2016.2-amd64.iso"
+        "kali-linux-2017.2-amd64.iso",
+        "http://cdimage.kali.org/kali-2017.2/kali-linux-2017.2-amd64.iso"
       ],
-      "iso_checksum_type": "sha1",
-      "iso_checksum": "25cc6d53a8bd8886fcb468eb4fbb4cdfac895c65",
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "4556775bfb981ae64a3cb19aa0b73e8dcac6e4ba524f31c4bc14c9137b99725d",
       "output_directory": "Kali_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
       "ssh_password": "password",
