@@ -1,6 +1,11 @@
 {
   "provisioners": [
     {
+      "type": "file",
+      "source": "/Applications/VMware Fusion.app/Contents//Library/isoimages/linux.iso",
+      "destination": "/root/linux.iso"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'password' | {{.Vars}} bash '{{.Path}}'",
       "script": "scripts/setup.sh"
