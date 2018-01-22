@@ -41,11 +41,11 @@
       "headless": false,
       "http_directory": "http",
       "iso_urls": [
-        "kali-linux-2017.2-amd64.iso",
-        "http://cdimage.kali.org/kali-2017.2/kali-linux-2017.2-amd64.iso"
+        "mini.iso",
+        "http://repo.kali.org/kali/dists/kali-rolling/main/installer-amd64/current/images/netboot/mini.iso"
       ],
       "iso_checksum_type": "sha256",
-      "iso_checksum": "4556775bfb981ae64a3cb19aa0b73e8dcac6e4ba524f31c4bc14c9137b99725d",
+      "iso_checksum": "2166ded4aec3fa87f8d7873b98c32b9c45798550aa301e5d5b27e130e0923e25",
       "output_directory": "Kali_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
       "ssh_password": "password",
