@@ -41,10 +41,10 @@
       "http_directory": "http",
       "iso_urls": [
         "iso/mini.iso",
-        "http://archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/20101020ubuntu318.41/images/netboot/mini.iso"
+        "http://archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/20101020ubuntu318.42/images/netboot/mini.iso"
       ],
       "iso_checksum_type": "sha256",
-      "iso_checksum": "84b0350a2ea7bb1ea1b767f628f3b1440cec50c80b5ba4053389902259d448ed",
+      "iso_checksum": "49c863211e53efe4cf72b2df49099567f6bcad765fe49c0f56bfe05347d8bceb",
       "output_directory": "Ubuntu_REMnux_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
       "ssh_password": "password",
