@@ -19,19 +19,19 @@ ubuntu-16.04:
 
 debug-remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
-	packer build -on-error=abort ubuntu-remnux-tools-remnux.json
+	packer build -debug -on-error=abort ubuntu-remnux-tools-remnux.json
 
 debug-sift:
 	packer validate ubuntu-remnux-tools-sift.json
-	packer build -on-error=abort ubuntu-remnux-tools-sift.json
+	packer build -debug -on-error=abort ubuntu-remnux-tools-sift.json
 
 debug-ubuntu:
 	packer validate ubuntu-14.04.json
-	packer build -on-error=abort ubuntu-14.04.json
+	packer build -debug -on-error=abort ubuntu-14.04.json
 
 debug-ubuntu-16.04:
 	packer validate ubuntu-16.04.json
-	packer build -on-error=abort ubuntu-16.04.json
+	packer build -debug -on-error=abort ubuntu-16.04.json
 
 install:
 	../bin/install.sh
