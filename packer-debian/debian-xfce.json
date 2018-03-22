@@ -27,7 +27,7 @@
         " debian-installer=en_US",
         " locale=en_US",
         " keymap=se",
-        " netcfg/get_hostname=cuckoo",
+        " netcfg/get_hostname=surf",
         " netcfg/get_domain=local",
         "<enter>"
       ],
@@ -37,24 +37,24 @@
       "headless": false,
       "http_directory": "http",
       "iso_urls": [
-        "debian-9.4.0-amd64-netinst.iso",
-        "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.iso"
+        "debian-9.4.0-amd64-xfce-CD-1.iso",
+        "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-xfce-CD-1.iso"
       ],
       "iso_checksum_type": "sha256",
-	  "iso_checksum": "124d270006703f2111224dec3bf7a9d01450168be41d4834f88fdd035552b044",
-      "output_directory": "Debian_9_64-bit.vmwarevm",
+	  "iso_checksum": "48aca27992897c7acc8334f9b5f31fc15e41069d76c14abbc17c5053329469e5",
+      "output_directory": "Debian_9_xfce_64-bit.vmwarevm",
       "shutdown_command": "echo 'password' | sudo -S shutdown -P now",
       "ssh_password": "password",
       "ssh_port": 22,
-      "ssh_username": "cuckoo",
+      "ssh_username": "user",
       "ssh_wait_timeout": "10000s",
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
-      "vm_name": "Debian_9_64-bit",
+      "vm_name": "Debian_9_xfce_64-bit",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
-        "memsize": "6144",
-        "numvcpus": "2",
+        "memsize": "2048",
+        "numvcpus": "1",
         "vhv.enable": "TRUE",
         "vpmc.enable": "TRUE"
       }
