@@ -1,5 +1,5 @@
 all: sift remnux
-ubuntu: ubuntu-16.04
+ubuntu: ubuntu-18.04
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -16,6 +16,10 @@ ubuntu-14.04:
 ubuntu-16.04:
 	packer validate ubuntu-16.04.json
 	packer build ubuntu-16.04.json
+
+ubuntu-18.04:
+	packer validate ubuntu-18.04.json
+	packer build ubuntu-18.04.json
 
 debug-remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -41,6 +45,7 @@ clean:
 	make clean-sift
 	make clean-ubuntu
 	make clean-ubuntu-16.04
+	make clean-ubuntu-18.04
 
 clean-remnux:
 	rm -rf Ubuntu_REMnux_64-bit.vmwarevm
@@ -53,6 +58,9 @@ clean-ubuntu:
 
 clean-ubuntu-16.04:
 	rm -rf Ubuntu_1604_64-bit.vmwarevm
+
+clean-ubuntu-18.04:
+	rm -rf Ubuntu_1804_64-bit.vmwarevm
 
 dist-clean:
 	make clean
