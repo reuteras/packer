@@ -3,8 +3,11 @@
 VMHOME="$HOME/Documents/Virtual Machines.localized"
 
 if [[ ! -d "$VMHOME" ]]; then
-    echo "This script assumes that $VMHOME exists."
-    exit 1
+    VMHOME="$HOME/Virtual Machines.localized"
+    if [[ ! -d "$VMHOME" ]]; then
+        echo "This script assumes that $VMHOME exists."
+        exit 1
+    fi
 fi
 
 for vm in [A-KN-Z]*; do
