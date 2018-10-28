@@ -9,6 +9,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq autoremove
 sudo apt-get autoclean
 sudo apt-get clean
 
+echo "Start zero of disk"
 dd if=/dev/zero of="$HOME/zero" conv=fsync
 sleep 1
 sync
