@@ -1,5 +1,6 @@
-all: sift remnux
+all: sift remnux moloch
 ubuntu: ubuntu-18.04
+moloch: ubuntu-18.04-moloch
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -21,6 +22,10 @@ ubuntu-18.04:
 	packer validate ubuntu-18.04.json
 	packer build ubuntu-18.04.json
 
+ubuntu-18.04-moloch:
+	packer validate ubuntu-18.04-moloch.json
+	packer build ubuntu-18.04-moloch.json
+
 debug-remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
 	packer build -debug -on-error=abort ubuntu-remnux-tools-remnux.json
@@ -37,6 +42,14 @@ debug-ubuntu-16.04:
 	packer validate ubuntu-16.04.json
 	packer build -debug -on-error=abort ubuntu-16.04.json
 
+debug-ubuntu-18.04:
+	packer validate ubuntu-18.04.json
+	packer build -debug -on-error=abort ubuntu-18.04.json
+
+debug-ubuntu-18.04-moloch:
+	packer validate ubuntu-18.04-moloch.json
+	packer build -debug -on-error=abort ubuntu-18.04-moloch.json
+
 install:
 	../bin/install.sh
 
@@ -46,6 +59,7 @@ clean:
 	make clean-ubuntu
 	make clean-ubuntu-16.04
 	make clean-ubuntu-18.04
+	make clean-ubuntu-18.04-moloch
 
 clean-remnux:
 	rm -rf Ubuntu_REMnux_64-bit.vmwarevm
@@ -61,6 +75,9 @@ clean-ubuntu-16.04:
 
 clean-ubuntu-18.04:
 	rm -rf Ubuntu_1804_64-bit.vmwarevm
+
+clean-ubuntu-18.04-moloch:
+	rm -rf Ubuntu_moloch.vmwarevm
 
 dist-clean:
 	make clean
