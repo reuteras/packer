@@ -7,7 +7,7 @@
     },
     {
       "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
       "script": "scripts/moloch.sh"
     },
     {
