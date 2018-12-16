@@ -3,6 +3,7 @@
 # Delete unneeded files.
 rm -f /home/malware/*.sh
 rm -f /home/malware/linux.iso
+rm -f /home/malware/examples.desktop
 
 # Clean
 sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq autoremove
