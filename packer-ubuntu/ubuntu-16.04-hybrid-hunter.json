@@ -1,0 +1,85 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/hybridhunter.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "install",
+        " auto=true",
+        " priority=critical",
+        " interface=ens33",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " grub-installer/bootdev=/dev/sda",
+        " initrd=/install/initrd.gz",
+        " -- ",
+        "<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 51200,
+      "guest_os_type": "ubuntu-64",
+      "headless": false,
+      "http_directory": "http",
+      "iso_urls": [
+        "iso/mini.iso",
+        "http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso"
+      ],
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "c94de1cc2e10160f325eb54638a5b5aa38f181d60ee33dae9578d96d932ee5f8",
+      "output_directory": "Ubuntu_1604_64-bit.vmwarevm",
+      "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
+      "ssh_password": "password",
+      "ssh_port": 22,
+      "ssh_username": "malware",
+      "ssh_wait_timeout": "10000s",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "{{.Flavor}}.iso",
+      "vm_name": "Ubuntu_1604_64-bit",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "8192",
+        "numvcpus": "4",
+		"ethernet0.networkName": "Admin Network",
+        "ethernet0.present": "TRUE",
+        "ethernet0.startConnected": "TRUE",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.addressType": "generated",
+        "ethernet0.generatedAddressOffset": "0",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet1.networkName": "Monitored Network",
+        "ethernet1.present": "TRUE",
+        "ethernet1.startConnected": "FALSE",
+        "ethernet1.virtualDev": "e1000",
+        "ethernet1.addressType": "generated",
+        "ethernet1.generatedAddressOffset": "0",
+        "ethernet1.wakeOnPcktRcv": "FALSE"
+      }
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "inline": [
+          "vmrun -T fusion snapshot Ubuntu_1604_64-bit.vmwarevm/Ubuntu_1604_64-bit.vmx Installed"
+        ],
+        "type": "shell-local"
+      }
+    ]
+ ]
+}
