@@ -8,6 +8,11 @@
     {
       "type": "shell",
       "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/disable_ipv6.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/cleanup.sh"
     }
   ],
