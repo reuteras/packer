@@ -2,6 +2,7 @@ all: sift remnux moloch
 ubuntu: ubuntu-18.04
 moloch: ubuntu-18.04-moloch
 hunter: ubuntu-16.04-hybrid-hunter
+so: ubuntu-16.04-security_onion
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -18,6 +19,10 @@ ubuntu-16.04:
 ubuntu-16.04-hybrid-hunter:
 	packer validate ubuntu-16.04-hybrid-hunter.json
 	packer build ubuntu-16.04-hybrid-hunter.json
+
+ubuntu-16.04-security_onion:
+	packer validate ubuntu-16.04-security_onion.json
+	packer build ubuntu-16.04-security_onion.json
 
 ubuntu-18.04:
 	packer validate ubuntu-18.04.json
@@ -60,6 +65,7 @@ clean:
 	make clean-ubuntu
 	make clean-ubuntu-16.04
 	make clean-ubuntu-16.04-hybrid-hunter
+	make clean-ubuntu-16.04-security_onion
 	make clean-ubuntu-18.04
 	make clean-ubuntu-18.04-moloch
 
@@ -77,6 +83,9 @@ clean-ubuntu-16.04:
 
 clean-ubuntu-16.04-hybrid-hunter:
 	rm -rf Hybrid_Hunter.vmwarevm
+
+clean-ubuntu-16.04-security_onion:
+	rm -rf Security_Onion.vmwarevm
 
 clean-ubuntu-18.04:
 	rm -rf Ubuntu_1804_64-bit.vmwarevm
