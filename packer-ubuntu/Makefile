@@ -44,7 +44,7 @@ debug-ubuntu-16.04:
 	packer validate ubuntu-16.04.json
 	packer build -debug -on-error=abort ubuntu-16.04.json
 
-debug-ubuntu-16.04:
+debug-ubuntu-16.04-hybrid-hunter:
 	packer validate ubuntu-16.04-hybrid-hunter.json
 	packer build -debug -on-error=abort ubuntu-16.04-hybrid-hunter.json
 
