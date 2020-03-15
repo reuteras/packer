@@ -1,8 +1,8 @@
 #!/bin/bash -eux
 
 # Delete unneeded files.
-rm -f /root/*.sh
-rm -f /root/*.iso
+sudo rm -f /root/*.sh
+sudo rm -f /root/*.iso
 
 # Run clean script from remnux-tools
 cd kali-tools
