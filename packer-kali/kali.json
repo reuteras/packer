@@ -1,67 +1,80 @@
 {
-  "provisioners": [
-    {
-      "type": "file",
-      "source": "/Applications/VMware Fusion.app/Contents//Library/isoimages/linux.iso",
-      "destination": "/root/linux.iso"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} bash '{{.Path}}'",
-      "script": "scripts/setup.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "{{.Vars}} bash '{{.Path}}'",
-      "script": "scripts/kali-tools-kali.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} bash '{{.Path}}'",
-      "script": "scripts/cleanup.sh"
-    }
-  ],
   "builders": [
     {
-      "type": "vmware-iso",
       "boot_command": [
         "<esc><wait>",
-        "<esc><wait>",
-        "install",
-        " auto=true",
-        " priority=critical",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-        " grub-installer/bootdev=/dev/sda",
-        " -- ",
-        "<enter>"
+        "/install.amd/vmlinuz<wait>",
+        " auto<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=sv<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US<wait>",
+        " fb=false<wait>",
+        " initrd=/install.amd/initrd.gz<wait>",
+        " kbd-chooser/method=sv<wait>",
+        " netcfg/choose_interface=eth0<wait>",
+        " console-keymaps-at/keymap=sv<wait>",
+        " keyboard-configuration/xkb-keymap=sv<wait>",
+        " keyboard-configuration/layout=Sweden<wait>",
+        " keyboard-configuration/variant=Sweden<wait>",
+        " locale=en_US<wait>",
+        " netcfg/get_domain=vm<wait>",
+        " netcfg/get_hostname=kali<wait>",
+        " grub-installer/bootdev=/dev/sda<wait>",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg auto=true priority=critical",
+        " -- <wait>",
+        "<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 51200,
-      "guest_os_type": "debian10-64",
+      "guest_os_type": "debian8-64",
       "headless": false,
       "http_directory": "http",
-      "iso_urls": [
-        "mini.iso",
-        "https://cdimage.kali.org/current/kali-linux-2019.4-amd64.iso"
-      ],
+      "iso_checksum": "26d032c1f473a8430ed6894a519b6a64b7836d63e3ea1c9e9d44a172eb9cb7e2",
       "iso_checksum_type": "sha256",
-      "iso_checksum": "bad0d602a531b872575e23cc025b45fee475523b51378a035928b733ca395ac5",
+      "iso_urls": [
+        "iso/kali-linux-2020.1a-installer-amd64.iso",
+        "https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1a-installer-amd64.iso"
+      ],
       "output_directory": "Kali_64-bit.vmwarevm",
-      "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
-      "ssh_password": "password",
+      "shutdown_command": "echo 'kali'|sudo -S shutdown -P now",
+      "ssh_password": "kali",
       "ssh_port": 22,
-      "ssh_username": "root",
-      "ssh_wait_timeout": "10000s",
-      "tools_upload_flavor": "linux",
-      "tools_upload_path": "{{.Flavor}}.iso",
+      "ssh_timeout": "8000s",
+      "ssh_username": "kali",
+      "type": "vmware-iso",
       "vm_name": "Kali_64-bit",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
-        "memsize": "2048",
-        "numvcpus": "2"
+        "ethernet0.pciSlotNumber": "32",
+        "memsize": "4096",
+        "numvcpus": "1"
       }
     }
   ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'kali' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'kali' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/kali-tools-kali.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh",
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "password": "",
+    "username": ""
+  },
   "post-processors": [
     [
       { 
@@ -71,5 +84,5 @@
         "type": "shell-local"
       }
     ]
- ]  
+  ]
 }
