@@ -1,6 +1,9 @@
-all: kali
+all: kali-full
 
 kali:
+	packer build kali.json
+
+kali-full:
 	make validate-kali
 	packer build kali.json
 
