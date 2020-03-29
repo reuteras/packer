@@ -52,6 +52,7 @@
       "tools_upload_path": "{{.Flavor}}.iso",
       "vm_name": "Debian_10_xfce_64-bit",
       "vmx_data": {
+        "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "cpuid.coresPerSocket": "1",
         "memsize": "2048",
         "numvcpus": "1",

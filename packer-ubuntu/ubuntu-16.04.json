@@ -46,6 +46,7 @@
       "tools_upload_path": "{{.Flavor}}.iso",
       "vm_name": "Ubuntu_1604_64-bit",
       "vmx_data": {
+        "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "cpuid.coresPerSocket": "1",
         "memsize": "4096",
         "numvcpus": "2"
