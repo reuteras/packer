@@ -39,8 +39,8 @@
         "https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1a-installer-amd64.iso"
       ],
       "output_directory": "Kali_64-bit.vmwarevm",
-      "shutdown_command": "echo 'kali'|sudo -S shutdown -P now",
-      "ssh_password": "kali",
+      "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
+      "ssh_password": "password",
       "ssh_port": 22,
       "ssh_timeout": "8000s",
       "ssh_username": "kali",
@@ -57,12 +57,12 @@
   ],
   "provisioners": [
     {
-      "execute_command": "echo 'kali' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/setup.sh",
       "type": "shell"
     },
     {
-      "execute_command": "echo 'kali' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/kali-tools-kali.sh",
       "type": "shell"
     },
