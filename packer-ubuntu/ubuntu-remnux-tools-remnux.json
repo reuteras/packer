@@ -50,7 +50,7 @@
       "ssh_password": "password",
       "ssh_port": 22,
       "ssh_username": "malware",
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
       "vm_name": "Ubuntu_REMnux_64-bit",
