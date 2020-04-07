@@ -47,7 +47,7 @@
       "ssh_password": "password",
       "ssh_port": 22,
       "ssh_username": "cuckoo",
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
       "vm_name": "Debian_10_64-bit",
