@@ -28,6 +28,10 @@ ubuntu-18.04:
 	packer validate ubuntu-18.04.json
 	packer build ubuntu-18.04.json
 
+ubuntu-20.04:
+	packer validate ubuntu-20.04.json
+	packer build ubuntu-20.04.json
+
 ubuntu-18.04-moloch:
 	packer validate ubuntu-18.04-moloch.json
 	packer build ubuntu-18.04-moloch.json
@@ -52,6 +56,10 @@ debug-ubuntu-18.04:
 	packer validate ubuntu-18.04.json
 	packer build -debug -on-error=abort ubuntu-18.04.json
 
+debug-ubuntu-20.04:
+	packer validate ubuntu-20.04.json
+	packer build -debug -on-error=abort ubuntu-20.04.json
+
 debug-ubuntu-18.04-moloch:
 	packer validate ubuntu-18.04-moloch.json
 	packer build -debug -on-error=abort ubuntu-18.04-moloch.json
@@ -67,6 +75,7 @@ clean:
 	make clean-ubuntu-16.04-hybrid-hunter
 	make clean-ubuntu-16.04-security_onion
 	make clean-ubuntu-18.04
+	make clean-ubuntu-20.04
 	make clean-ubuntu-18.04-moloch
 
 clean-remnux:
@@ -89,6 +98,9 @@ clean-ubuntu-16.04-security_onion:
 
 clean-ubuntu-18.04:
 	rm -rf Ubuntu_1804_64-bit.vmwarevm
+
+clean-ubuntu-20.04:
+	rm -rf Ubuntu_2004_64-bit.vmwarevm
 
 clean-ubuntu-18.04-moloch:
 	rm -rf Ubuntu_moloch.vmwarevm
