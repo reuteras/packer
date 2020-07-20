@@ -1,0 +1,50 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks8.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 51200,
+      "guest_os_type": "centos8-64",
+      "headless": false,
+      "http_directory": "http",
+      "iso_checksum": "sha256:47ab14778c823acae2ee6d365d76a9aed3f95bb8d0add23a06536b58bb5293c0",
+      "iso_urls": [
+        "http://mirrors.mit.edu/centos/8/isos/x86_64/CentOS-8.2.2004-x86_64-minimal.iso"
+      ],
+      "output_directory": "Centos_8_64-bit.vmwarevm",
+      "shutdown_command": "echo 'password'|sudo -S /sbin/halt -h -p",
+      "ssh_password": "password",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "ssh_username": "user",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "{{.Flavor}}.iso",
+      "type": "vmware-iso",
+      "vm_name": "Centos_8_64-bit",
+      "vmx_data": {
+        "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
+        "memsize": "2048"
+      }
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "inline": [
+          "vmrun -T fusion snapshot Centos_8_64-bit.vmwarevm/Centos_8_64-bit.vmx Installed"
+        ],
+        "type": "shell-local"
+      }
+    ]
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh",
+      "type": "shell"
+    }
+  ]
+}
+
