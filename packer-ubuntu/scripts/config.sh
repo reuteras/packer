@@ -40,5 +40,5 @@ cat << EOF > ~/.config/monitors.xml
 </monitors>
 EOF
 
-echo "xrandr --output Virtual1 --mode 1440x900 --rate 60" > /home/malware/.xprofile
+echo "xrandr --output Virtual1 --mode 1440x900 --rate 60" > "$HOME"/.xprofile
 # dconf write /org/compiz/profiles/unity/plugins/core/outputs "['1440x900+0+0']"

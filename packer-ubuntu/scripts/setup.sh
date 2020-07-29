@@ -6,5 +6,9 @@ apt-get -yqq install git open-vm-tools open-vm-tools-desktop vim
 apt-get -yqq dist-upgrade
 
 # Add malware user to sudoers.
-echo "malware        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+if [[ -d /home/malware ]]; then
+    echo "malware        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+else
+    echo "remnu x        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+fi
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
