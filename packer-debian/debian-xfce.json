@@ -1,24 +1,6 @@
 {
-  "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/setup.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/setup-debian.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/cleanup.sh"
-    }
-  ],
   "builders": [
     {
-      "type": "vmware-iso",
       "boot_command": [
         "<esc><wait>",
         "install",
@@ -31,25 +13,25 @@
         " netcfg/get_domain=local",
         "<enter>"
       ],
-	  "boot_wait": "10s",
+      "boot_wait": "10s",
       "disk_size": 81920,
       "guest_os_type": "debian8-64",
       "headless": false,
       "http_directory": "http",
+      "iso_checksum": "sha256:b325326614f26760fc8d4fad48df3bf48fb8a3a437298bbe3d01c5a759c889d4",
       "iso_urls": [
-        "debian-10.4.0-amd64-xfce-CD-1.iso",
-        "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.4.0-amd64-xfce-CD-1.iso"
+        "debian-10.5.0-amd64-xfce-CD-1.iso",
+        "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.5.0-amd64-xfce-CD-1.iso"
       ],
-      "iso_checksum_type": "sha256",
-	  "iso_checksum": "b325326614f26760fc8d4fad48df3bf48fb8a3a437298bbe3d01c5a759c889d4",
       "output_directory": "Debian_10_xfce_64-bit.vmwarevm",
       "shutdown_command": "echo 'password' | sudo -S shutdown -P now",
       "ssh_password": "password",
       "ssh_port": 22,
-      "ssh_username": "user",
       "ssh_timeout": "10000s",
+      "ssh_username": "user",
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
+      "type": "vmware-iso",
       "vm_name": "Debian_10_xfce_64-bit",
       "vmx_data": {
         "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
@@ -70,6 +52,23 @@
         "type": "shell-local"
       }
     ]
- ]
-
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup-debian.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh",
+      "type": "shell"
+    }
+  ]
 }
+
