@@ -1,24 +1,6 @@
 {
-  "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/setup.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "{{.Vars}} bash '{{.Path}}'",
-      "script": "scripts/so.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/cleanup.sh"
-    }
-  ],
   "builders": [
     {
-      "type": "vmware-iso",
       "boot_command": [
         "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "install",
@@ -36,40 +18,40 @@
       "guest_os_type": "ubuntu-64",
       "headless": false,
       "http_directory": "http",
+      "iso_checksum": "sha256:16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
       "iso_urls": [
         "iso/mini.iso",
         "http://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-amd64.iso"
       ],
-      "iso_checksum_type": "sha256",
-      "iso_checksum": "16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
       "output_directory": "Security_Onion.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
       "ssh_password": "password",
       "ssh_port": 22,
-      "ssh_username": "malware",
       "ssh_timeout": "10000s",
+      "ssh_username": "malware",
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
+      "type": "vmware-iso",
       "vm_name": "Security_Onion",
       "vmx_data": {
         "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "cpuid.coresPerSocket": "1",
-        "memsize": "8192",
-        "numvcpus": "4",
-		"ethernet0.networkName": "Admin Network",
+        "ethernet0.addressType": "generated",
+        "ethernet0.generatedAddressOffset": "0",
+        "ethernet0.networkName": "Admin Network",
         "ethernet0.present": "TRUE",
         "ethernet0.startConnected": "TRUE",
         "ethernet0.virtualDev": "e1000",
-        "ethernet0.addressType": "generated",
-        "ethernet0.generatedAddressOffset": "0",
         "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet1.addressType": "generated",
+        "ethernet1.generatedAddressOffset": "0",
         "ethernet1.networkName": "Monitored Network",
         "ethernet1.present": "TRUE",
         "ethernet1.startConnected": "FALSE",
         "ethernet1.virtualDev": "e1000",
-        "ethernet1.addressType": "generated",
-        "ethernet1.generatedAddressOffset": "0",
-        "ethernet1.wakeOnPcktRcv": "FALSE"
+        "ethernet1.wakeOnPcktRcv": "FALSE",
+        "memsize": "8192",
+        "numvcpus": "4"
       }
     }
   ],
@@ -82,5 +64,23 @@
         "type": "shell-local"
       }
     ]
- ]
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/so.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh",
+      "type": "shell"
+    }
+  ]
 }
+
