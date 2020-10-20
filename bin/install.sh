@@ -10,7 +10,9 @@ if [[ ! -d "$VMHOME" ]]; then
     fi
 fi
 
-for vm in [A-KN-Z]*; do
+shopt -s nullglob
+
+for vm in [A-Z]*.vmwarevm ; do
     echo "Installing $vm"
     if [[ -d "$VMHOME/$vm" ]]; then
         echo "$VMHOME/$vm already exists! Will not overwrite."
