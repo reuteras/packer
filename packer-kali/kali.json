@@ -32,10 +32,9 @@
       "guest_os_type": "debian8-64",
       "headless": false,
       "http_directory": "http",
-      "iso_checksum": "sha256:26d032c1f473a8430ed6894a519b6a64b7836d63e3ea1c9e9d44a172eb9cb7e2",
+      "iso_checksum": "sha256:50492d761e400c2b5e22c8f253dd6f75c27e4bc84e33c2eff272476a0588fb02",
       "iso_urls": [
-        "iso/kali-linux-2020.1a-installer-amd64.iso",
-        "https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1a-installer-amd64.iso"
+        "https://cdimage.kali.org/kali-2020.4/kali-linux-2020.4-installer-amd64.iso"
       ],
       "output_directory": "Kali_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
