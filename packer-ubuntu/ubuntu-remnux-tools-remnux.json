@@ -2,24 +2,29 @@
   "builders": [
     {
       "boot_command": [
-        "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "install",
+        "<tab>",
+        " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
         " auto=true",
-        " priority=critical",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-        " grub-installer/bootdev=/dev/sda",
+        " locale=en_US",
+        " console-setup/ask_detect=false",
+        " console-setup/layoutcode=sv",
+        " console-setup/modelcode=pc105",
+        " debian-installer=en_US",
         " initrd=/install/initrd.gz",
-        " -- ",
-        "<enter>"
+        " netcfg/get_hostname=ubuntu",
+        " keyboard-configuration/xkb-keymap=sv",
+        " keyboard-configuration/layout=Sweden",
+        " keyboard-configuration/variant=Sweden",
+        "<enter><wait>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "5s",
       "disk_size": 51200,
       "guest_os_type": "ubuntu-64",
       "headless": false,
       "http_directory": "http",
-      "iso_checksum": "sha256:8c5fc24894394035402f66f3824beb7234b757dd2b5531379cb310cedfdf0996",
+      "iso_checksum": "sha256:0e79e00bf844929d40825b1f0e8634415cda195ba23bae0b041911fde4dfe018",
       "iso_urls": [
-        "http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.5-server-amd64.iso"
+        "http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/mini.iso"
       ],
       "output_directory": "Ubuntu_REMnux_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
