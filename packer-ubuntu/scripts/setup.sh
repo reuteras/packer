@@ -9,6 +9,6 @@ apt-get -yqq dist-upgrade
 if [[ -d /home/malware ]]; then
     echo "malware        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 else
-    echo "remnu x        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+    echo "remnux        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 fi
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
