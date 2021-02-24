@@ -9,9 +9,9 @@
       "guest_os_type": "centos8-64",
       "headless": false,
       "http_directory": "http",
-      "iso_checksum": "sha256:47ab14778c823acae2ee6d365d76a9aed3f95bb8d0add23a06536b58bb5293c0",
+      "iso_checksum": "sha256:1d50e3028377cc084c63806bfc27c518f94395973d68e5714412a90f53beebcf",
       "iso_urls": [
-        "http://mirrors.mit.edu/centos/8/isos/x86_64/CentOS-8.2.2004-x86_64-minimal.iso"
+        "http://mirrors.glesys.net/CentOS/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20210223-boot.iso"
       ],
       "output_directory": "Centos_8_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S /sbin/halt -h -p",
