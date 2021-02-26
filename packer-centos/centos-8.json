@@ -2,7 +2,7 @@
   "builders": [
     {
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks8.cfg<enter><wait>"
+        "<tab> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks8.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 51200,
