@@ -16,14 +16,6 @@ ubuntu-16.04:
 	packer validate ubuntu-16.04.json
 	packer build ubuntu-16.04.json
 
-ubuntu-16.04-hybrid-hunter:
-	packer validate ubuntu-16.04-hybrid-hunter.json
-	packer build ubuntu-16.04-hybrid-hunter.json
-
-ubuntu-16.04-security_onion:
-	packer validate ubuntu-16.04-security_onion.json
-	packer build ubuntu-16.04-security_onion.json
-
 ubuntu-18.04:
 	packer validate ubuntu-18.04.json
 	packer build ubuntu-18.04.json
@@ -47,10 +39,6 @@ debug-sift:
 debug-ubuntu-16.04:
 	packer validate ubuntu-16.04.json
 	packer build -debug -on-error=abort ubuntu-16.04.json
-
-debug-ubuntu-16.04-hybrid-hunter:
-	packer validate ubuntu-16.04-hybrid-hunter.json
-	packer build -debug -on-error=abort ubuntu-16.04-hybrid-hunter.json
 
 debug-ubuntu-18.04:
 	packer validate ubuntu-18.04.json
