@@ -37,8 +37,7 @@
         "cpuid.coresPerSocket": "1",
         "memsize": "6144",
         "numvcpus": "2",
-        "vhv.enable": "TRUE",
-        "vpmc.enable": "TRUE"
+        "vhv.enable": "TRUE"
       }
     }
   ],
