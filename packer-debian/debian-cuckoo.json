@@ -64,6 +64,11 @@
     },
     {
       "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/setup-virt.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
       "script": "scripts/config.sh",
       "type": "shell"
     },
