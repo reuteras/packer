@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 sudo apt -y -qq install \
-    qemu-system-x86_64 \
+    qemu-system-x86 \
     virt-manager
 
 sudo adduser cuckoo libvirt
