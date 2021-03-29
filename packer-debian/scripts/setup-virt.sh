@@ -1,6 +1,7 @@
 #!/bin/bash -eux
 
 sudo apt -y -qq install \
+    libvirt-daemon-system \
     qemu-system-x86 \
     virt-manager
 
