@@ -1,3 +1,4 @@
+CHECKPOINT_DISABLE ?= 1
 all: sift remnux moloch
 ubuntu: ubuntu-18.04
 moloch: ubuntu-18.04-moloch

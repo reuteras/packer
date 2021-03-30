@@ -1,3 +1,4 @@
+CHECKPOINT_DISABLE ?= 1
 all: centos-8-full
 
 centos-7:

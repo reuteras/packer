@@ -1,3 +1,4 @@
+CHECKPOINT_DISABLE ?= 1
 all: windows10
 
 windows10:
@@ -13,6 +14,9 @@ debug-windows10:
 
 validate-windows10:
 	packer validate windows_10.json
+
+windows10_malware:
+	packer build windows_10_malware.json
 
 install:
 	../bin/install.sh

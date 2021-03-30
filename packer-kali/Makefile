@@ -1,3 +1,4 @@
+CHECKPOINT_DISABLE ?= 1
 all: kali-full
 
 kali:

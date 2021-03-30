@@ -15,4 +15,5 @@ sudo apt update && sudo apt -y -qq install packer
 cd || exit
 git clone https://github.com/reuteras/packer.git
 cd packer || exit
+cd packer-windows || exit
 wget -q https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso
