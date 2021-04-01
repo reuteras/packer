@@ -2,7 +2,7 @@
 
 # Delete unneeded files.
 rm -f /home/cuckoo/*.sh
-rm -f /home/cuckoo/linux.iso
+rm -f /home/*/linux.iso
 
 # Run clean
 sudo apt-get -y autoremove
