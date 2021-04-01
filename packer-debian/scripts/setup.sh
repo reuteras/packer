@@ -6,4 +6,5 @@ apt-get -y install git sudo
 
 # Add cuckoo user to sudoers.
 echo "cuckoo        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+echo "user          ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
