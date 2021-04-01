@@ -22,7 +22,7 @@
       "iso_urls": [
         "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.9.0-amd64-netinst.iso"
       ],
-      "output_directory": "Debian_10_64-bit.vmwarevm",
+      "output_directory": "Debian_10_Chrome-bit.vmwarevm",
       "shutdown_command": "echo 'password' | sudo -S shutdown -P now",
       "ssh_password": "password",
       "ssh_port": 22,
@@ -31,7 +31,7 @@
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
       "type": "vmware-iso",
-      "vm_name": "Debian_10_64-bit",
+      "vm_name": "Debian_10_Chrome-bit",
       "vmx_data": {
         "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "cpuid.coresPerSocket": "1",
@@ -44,7 +44,7 @@
     [
       {
         "inline": [
-          "vmrun -T fusion snapshot Debian_10_64-bit.vmwarevm/Debian_10_64-bit.vmx Installed"
+          "vmrun -T fusion snapshot Debian_10_Chrome-bit.vmwarevm/Debian_10_Chrome-bit.vmx Installed"
         ],
         "type": "shell-local"
       }

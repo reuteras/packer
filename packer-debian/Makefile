@@ -13,9 +13,9 @@ debug-cuckoo:
 	make validate-cuckoo
 	packer build -on-error=abort debian-cuckoo.json
 
-debian-xfce:
-	make validate-debian-xfce
-	packer build debian-xfce.json
+debian-chrome:
+	make validate-debian-chrome
+	packer build debian-chrome.json
 
 validate-cuckoo:
 	packer validate debian-cuckoo.json
@@ -23,8 +23,8 @@ validate-cuckoo:
 validate-debian:
 	packer validate debian.json
 
-validate-debian-xfce:
-	packer validate debian-xfce.json
+validate-debian-chrome:
+	packer validate debian-chrome.json
 
 install:
 	../bin/install.sh
@@ -32,8 +32,8 @@ install:
 clean:
 	rm -rf Debian_Cuckoo_64-bit.vmwarevm
 	rm -rf Debian_64-bit.vmwarevm
-	rm -rf Debian_9_64-bit.vmwarevm
-	rm -rf Debian_9_xfce_64-bit.vmwarevm
+	rm -rf Debian_10_64-bit.vmwarevm
+	rm -rf Debian_10_chrome-bit.vmwarevm
 
 dist-clean:
 	make clean
