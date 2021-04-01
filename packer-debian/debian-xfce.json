@@ -36,9 +36,7 @@
         "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "cpuid.coresPerSocket": "1",
         "memsize": "2048",
-        "numvcpus": "1",
-        "vhv.enable": "TRUE",
-        "vpmc.enable": "TRUE"
+        "numvcpus": "1"
       }
     }
   ],
@@ -60,7 +58,7 @@
     },
     {
       "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/setup-debian.sh",
+      "script": "scripts/setup-debian-chrome.sh",
       "type": "shell"
     },
     {
