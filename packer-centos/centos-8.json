@@ -11,7 +11,7 @@
       "http_directory": "http",
       "iso_checksum": "sha256:80582e51fb543ac956b7fe2f07a3ccda056c61dbb0e2e185be42d3f51b3db2d1",
       "iso_urls": [
-        "http://mirrors.glesys.net/CentOS/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20210302-boot.iso"
+        "http://mirrors.glesys.net/CentOS/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20210406-boot.iso"
       ],
       "output_directory": "Centos_8_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S /sbin/halt -h -p",
