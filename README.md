@@ -29,7 +29,7 @@ Available in **packer-ubuntu** and has three targets:
 
 At the moment you have to add a usb controller manually.
 
-### TODO
+## TODO
 
 Create configurations for
 
@@ -44,3 +44,7 @@ Other things to do:
 * Better preseed.cfg files
 * Use templates
 * And much more :)
+
+## Support
+
+<a href="https://www.buymeacoffee.com/reuteras" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
