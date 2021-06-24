@@ -4,6 +4,7 @@ ubuntu: ubuntu-18.04
 moloch: ubuntu-18.04-moloch
 hunter: ubuntu-16.04-hybrid-hunter
 so: ubuntu-16.04-security_onion
+timesketch: ubuntu-timesketch
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -24,6 +25,15 @@ ubuntu-18.04:
 ubuntu-20.04:
 	packer validate ubuntu-20.04.json
 	packer build ubuntu-20.04.json
+
+ubuntu-timesketch:
+	packer validate ubuntu-timesketch.json
+	packer build ubuntu-timesketch.json
+
+ubuntu-timesketch-ova:
+	packer validate ubuntu-timesketch.json
+	packer build ubuntu-timesketch.json
+	/Applications/VMware\ OVF\ Tool/ovftool Ubuntu_Timesketch_64-bit.vmwarevm/Ubuntu_Timesketch_64-bit.vmx timesketch.ova
 
 ubuntu-18.04-moloch:
 	packer validate ubuntu-18.04-moloch.json
@@ -64,8 +74,9 @@ clean:
 	make clean-ubuntu-16.04-hybrid-hunter
 	make clean-ubuntu-16.04-security_onion
 	make clean-ubuntu-18.04
-	make clean-ubuntu-20.04
 	make clean-ubuntu-18.04-moloch
+	make clean-ubuntu-20.04
+	make clean-ubuntu-timesketch
 
 clean-remnux:
 	rm -rf Ubuntu_REMnux_64-bit.vmwarevm
@@ -90,6 +101,9 @@ clean-ubuntu-18.04:
 
 clean-ubuntu-20.04:
 	rm -rf Ubuntu_2004_64-bit.vmwarevm
+
+clean-ubuntu-timesketch:
+	rm -rf Ubuntu_Timesketch_64-bit.vmwarevm timesketch.ova
 
 clean-ubuntu-18.04-moloch:
 	rm -rf Ubuntu_moloch.vmwarevm
