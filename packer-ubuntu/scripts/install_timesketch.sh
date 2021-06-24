@@ -26,5 +26,22 @@ sudo ~/deploy_timesketch.sh
 cd timesketch
 sudo docker-compose pull
 
+# Install Timesketch Notebook
+cd || exit
+mkdir notebook
+cat << EOF > docker-compose.yml
+version: '3'
+services:
+  notebook:
+    container_name: notebook
+    image: us-docker.pkg.dev/osdfir-registry/timesketch/notebook:latest
+    ports:
+      - 127.0.0.1:8844:8844
+    restart: on-failure
+    volumes:
+      - /data:/usr/local/src/picadata/
+EOF
+sudo docker-compose pull
+
 # Download plaso
 sudo docker pull log2timeline/plaso
