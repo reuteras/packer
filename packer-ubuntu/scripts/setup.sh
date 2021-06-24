@@ -2,7 +2,7 @@
 
 # Install git
 apt-get -yqq update
-apt-get -yqq install git open-vm-tools open-vm-tools-desktop vim
+apt-get -yqq install git open-vm-tools open-vm-tools-desktop screen tmux vim
 apt-get -yqq dist-upgrade
 
 # Add malware user to sudoers.
