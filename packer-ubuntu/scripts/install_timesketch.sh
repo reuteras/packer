@@ -19,16 +19,19 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo apt install -y docker-compose
 
 # Install Timesketch
+cd
 curl -s -O https://raw.githubusercontent.com/google/timesketch/master/contrib/deploy_timesketch.sh
 chmod 755 deploy_timesketch.sh
-cd /opt
+cd /opt || exit
 sudo ~/deploy_timesketch.sh
-cd timesketch
+sudo chown -R malware:malware /opt/timesketch
+cd timesketch || exit
 sudo docker-compose pull
 
 # Install Timesketch Notebook
-cd || exit
-mkdir notebook
+sudo mkdir /opt/notebook
+sudo chown -R malware:malware /opt/notebook
+cd /opt/notebook || exit
 cat << EOF > docker-compose.yml
 version: '3'
 services:
