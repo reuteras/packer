@@ -1,7 +1,9 @@
 CHECKPOINT_DISABLE ?= 1
-all: sift remnux moloch
+all: sift remnux arkime
 ubuntu: ubuntu-18.04
-moloch: ubuntu-18.04-moloch
+moloch: arkime
+arkime: ubuntu-18.04-arkime
+arkime-ecs: ubuntu-18.04-arkime-ecs
 hunter: ubuntu-16.04-hybrid-hunter
 so: ubuntu-16.04-security_onion
 timesketch: ubuntu-timesketch
@@ -35,9 +37,13 @@ ubuntu-timesketch-ova:
 	packer build ubuntu-timesketch.json
 	/Applications/VMware\ OVF\ Tool/ovftool Ubuntu_Timesketch_64-bit.vmwarevm/Ubuntu_Timesketch_64-bit.vmx timesketch.ova
 
-ubuntu-18.04-moloch:
-	packer validate ubuntu-18.04-moloch.json
-	packer build ubuntu-18.04-moloch.json
+ubuntu-18.04-arkime:
+	packer validate ubuntu-18.04-arkime.json
+	packer build ubuntu-18.04-arkime.json
+
+ubuntu-18.04-arkime-ecs:
+	packer validate ubuntu-18.04-arkime-ecs.json
+	packer build ubuntu-18.04-arkime-ecs.json
 
 debug-remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -59,9 +65,13 @@ debug-ubuntu-20.04:
 	packer validate ubuntu-20.04.json
 	packer build -debug -on-error=abort ubuntu-20.04.json
 
-debug-ubuntu-18.04-moloch:
-	packer validate ubuntu-18.04-moloch.json
-	packer build -debug -on-error=abort ubuntu-18.04-moloch.json
+debug-ubuntu-18.04-arkime:
+	packer validate ubuntu-18.04-arkime.json
+	packer build -debug -on-error=abort ubuntu-18.04-arkime.json
+
+debug-ubuntu-18.04-arkime-ecs:
+	packer validate ubuntu-18.04-arkime-ecs.json
+	packer build -debug -on-error=abort ubuntu-18.04-arkime-ecs.json
 
 install:
 	../bin/install.sh
@@ -74,7 +84,8 @@ clean:
 	make clean-ubuntu-16.04-hybrid-hunter
 	make clean-ubuntu-16.04-security_onion
 	make clean-ubuntu-18.04
-	make clean-ubuntu-18.04-moloch
+	make clean-ubuntu-18.04-arkime
+	make clean-ubuntu-18.04-arkime-ecs
 	make clean-ubuntu-20.04
 	make clean-ubuntu-timesketch
 
@@ -105,8 +116,11 @@ clean-ubuntu-20.04:
 clean-ubuntu-timesketch:
 	rm -rf Ubuntu_Timesketch_64-bit.vmwarevm timesketch.ova
 
-clean-ubuntu-18.04-moloch:
-	rm -rf Ubuntu_moloch.vmwarevm
+clean-ubuntu-18.04-arkime:
+	rm -rf Ubuntu_arkime.vmwarevm
+
+clean-ubuntu-18.04-arkime-ecs:
+	rm -rf Ubuntu_arkime_ecs.vmwarevm
 
 dist-clean:
 	make clean

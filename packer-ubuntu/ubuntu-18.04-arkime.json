@@ -23,7 +23,7 @@
         "iso/mini.iso",
         "http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.5-server-amd64.iso"
       ],
-      "output_directory": "Ubuntu_moloch.vmwarevm",
+      "output_directory": "Ubuntu_arkime.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
       "ssh_password": "password",
       "ssh_port": 22,
@@ -32,7 +32,7 @@
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
       "type": "vmware-iso",
-      "vm_name": "Ubuntu_moloch",
+      "vm_name": "Ubuntu_arkime",
       "vmx_data": {
         "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "cpuid.coresPerSocket": "1",
@@ -59,7 +59,7 @@
     [
       {
         "inline": [
-          "vmrun -T fusion snapshot Ubuntu_moloch.vmwarevm/Ubuntu_moloch.vmx Installed"
+          "vmrun -T fusion snapshot Ubuntu_arkime.vmwarevm/Ubuntu_arkime.vmx Installed"
         ],
         "type": "shell-local"
       }
@@ -73,7 +73,7 @@
     },
     {
       "execute_command": "{{.Vars}} bash '{{.Path}}'",
-      "script": "scripts/moloch.sh",
+      "script": "scripts/arkime.sh",
       "type": "shell"
     },
     {
