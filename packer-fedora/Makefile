@@ -1,5 +1,7 @@
 CHECKPOINT_DISABLE ?= 1
-all: fedora-34-full
+all: fedora-34-gui-full
+nogui: fedora-34
+gui: fedora-34-gui
 
 fedora-34:
 	packer build fedora-34.json
