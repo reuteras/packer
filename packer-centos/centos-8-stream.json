@@ -2,18 +2,18 @@
   "builders": [
     {
       "boot_command": [
-        "<tab> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks8.cfg<enter><wait>"
+        "<tab> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks8-stream.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 51200,
       "guest_os_type": "centos8-64",
       "headless": false,
       "http_directory": "http",
-      "iso_checksum": "sha256:562afe0c26df9673f168d64be2dfb0d24ce981e12b81db4171820af210e4cb7d",
+      "iso_checksum": "sha256:79ba22aec5589fc9222d294d4079a0631576f6ba2c081952e81a4e5933126c74",
       "iso_urls": [
-        "http://mirrors.glesys.net/CentOS/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20210506-boot.iso"
+        "http://mirrors.glesys.net/CentOS/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20210706-boot.iso"
       ],
-      "output_directory": "Centos_8_64-bit.vmwarevm",
+      "output_directory": "Centos_8_stream-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S /sbin/halt -h -p",
       "ssh_password": "password",
       "ssh_port": 22,
@@ -22,7 +22,7 @@
       "tools_upload_flavor": "linux",
       "tools_upload_path": "{{.Flavor}}.iso",
       "type": "vmware-iso",
-      "vm_name": "Centos_8_64-bit",
+      "vm_name": "Centos_8_stream-bit",
       "vmx_data": {
         "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
         "memsize": "2048"
@@ -33,7 +33,7 @@
     [
       {
         "inline": [
-          "vmrun -T fusion snapshot Centos_8_64-bit.vmwarevm/Centos_8_64-bit.vmx Installed"
+          "vmrun -T fusion snapshot Centos_8_stream-bit.vmwarevm/Centos_8_stream-bit.vmx Installed"
         ],
         "type": "shell-local"
       }

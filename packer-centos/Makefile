@@ -1,5 +1,8 @@
 CHECKPOINT_DISABLE ?= 1
-all: centos-8-full
+all: centos-8-stream-full
+7: centos-7-full
+8: centos-8-full
+stream: centos-8-stream-full
 
 centos-7:
 	packer build centos-7.json
@@ -28,6 +31,20 @@ debug-centos-8:
 
 validate-centos-8:
 	packer validate centos-8.json
+
+centos-8-stream:
+	packer build centos-8-stream.json
+
+centos-8-stream-full:
+	make validate-centos-8-stream
+	packer build centos-8-stream.json
+
+debug-centos-8-stream:
+	make validate-centos-8-stream
+	packer build -on-error=abort centos-8-stream.json
+
+validate-centos-8-stream:
+	packer validate centos-8-stream.json
 
 install:
 	../bin/install.sh
