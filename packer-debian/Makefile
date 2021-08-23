@@ -1,5 +1,5 @@
 CHECKPOINT_DISABLE ?= 1
-all: cuckoo
+all: debian
 
 cuckoo:
 	make validate-cuckoo
@@ -32,8 +32,8 @@ install:
 clean:
 	rm -rf Debian_Cuckoo_64-bit.vmwarevm
 	rm -rf Debian_64-bit.vmwarevm
-	rm -rf Debian_10_64-bit.vmwarevm
-	rm -rf Debian_10_chrome-bit.vmwarevm
+	rm -rf Debian_11_64-bit.vmwarevm
+	rm -rf Debian_11_chrome-bit.vmwarevm
 
 dist-clean:
 	make clean
