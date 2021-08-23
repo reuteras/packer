@@ -3,7 +3,6 @@ all: sift remnux arkime
 ubuntu: ubuntu-18.04
 moloch: arkime
 arkime: ubuntu-18.04-arkime
-arkime-ecs: ubuntu-18.04-arkime-ecs
 hunter: ubuntu-16.04-hybrid-hunter
 so: ubuntu-16.04-security_onion
 timesketch: ubuntu-timesketch
@@ -41,10 +40,6 @@ ubuntu-18.04-arkime:
 	packer validate ubuntu-18.04-arkime.json
 	packer build ubuntu-18.04-arkime.json
 
-ubuntu-18.04-arkime-ecs:
-	packer validate ubuntu-18.04-arkime-ecs.json
-	packer build ubuntu-18.04-arkime-ecs.json
-
 debug-remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
 	packer build -debug -on-error=abort ubuntu-remnux-tools-remnux.json
@@ -69,10 +64,6 @@ debug-ubuntu-18.04-arkime:
 	packer validate ubuntu-18.04-arkime.json
 	packer build -debug -on-error=abort ubuntu-18.04-arkime.json
 
-debug-ubuntu-18.04-arkime-ecs:
-	packer validate ubuntu-18.04-arkime-ecs.json
-	packer build -debug -on-error=abort ubuntu-18.04-arkime-ecs.json
-
 install:
 	../bin/install.sh
 
@@ -85,7 +76,6 @@ clean:
 	make clean-ubuntu-16.04-security_onion
 	make clean-ubuntu-18.04
 	make clean-ubuntu-18.04-arkime
-	make clean-ubuntu-18.04-arkime-ecs
 	make clean-ubuntu-20.04
 	make clean-ubuntu-timesketch
 
@@ -118,9 +108,6 @@ clean-ubuntu-timesketch:
 
 clean-ubuntu-18.04-arkime:
 	rm -rf Ubuntu_arkime.vmwarevm
-
-clean-ubuntu-18.04-arkime-ecs:
-	rm -rf Ubuntu_arkime_ecs.vmwarevm
 
 dist-clean:
 	make clean
