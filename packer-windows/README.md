@@ -5,3 +5,8 @@ The build for Windows 10 is based on the [packer-windows](https://github.com/Ste
 My goal is to have scripts to build for VMware Fusion and maybe also for libvirt.
 
 <ioapic driver="kvm" />
+
+## Todo
+
+- [flare-vm](https://github.com/fireeye/flare-vm)
+
