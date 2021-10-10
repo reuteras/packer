@@ -3,28 +3,28 @@ all: debian
 
 cuckoo:
 	make validate-cuckoo
-	packer build debian-cuckoo.json
+	packer build -var-file=debian-vars.jsondebian-cuckoo.json
 
 debian:
 	make validate-debian
-	packer build debian.json
+	packer build -var-file=debian-vars.json debian.json
 
 debug-cuckoo:
 	make validate-cuckoo
-	packer build -on-error=abort debian-cuckoo.json
+	packer build -on-error=abort -var-file=debian-vars.json debian-cuckoo.json
 
 debian-chrome:
 	make validate-debian-chrome
-	packer build debian-chrome.json
+	packer build -var-file=debian-vars.json debian-chrome.json
 
 validate-cuckoo:
-	packer validate debian-cuckoo.json
+	packer validate -var-file=debian-vars.json debian-cuckoo.json
 
 validate-debian:
-	packer validate debian.json
+	packer validate -var-file=debian-vars.json debian.json
 
 validate-debian-chrome:
-	packer validate debian-chrome.json
+	packer validate -var-file=debian-vars.json debian-chrome.json
 
 install:
 	../bin/install.sh
