@@ -1,6 +1,6 @@
 CHECKPOINT_DISABLE ?= 1
-all: sift remnux arkime
-ubuntu: ubuntu-18.04
+all: sift remnux arkime ubuntu
+ubuntu: ubuntu-20.04
 moloch: arkime
 arkime: ubuntu-18.04-arkime
 hunter: ubuntu-16.04-hybrid-hunter
