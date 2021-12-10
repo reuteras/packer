@@ -32,9 +32,9 @@
       "guest_os_type": "debian8-64",
       "headless": false,
       "http_directory": "http",
-      "iso_checksum": "sha256:ef83bafe1f19088666a8080d7ea07bd4f8da2fda0fcb3ef5f2ce2658f349c119",
+      "iso_checksum": "sha256:13c8ed5b87462e966c5afca129a4b76247f5b2b166733a13d154d1a1d31521d3",
       "iso_urls": [
-        "https://cdimage.kali.org/kali-2021.2/kali-linux-2021.2-installer-amd64.iso"
+        "https://cdimage.kali.org/kali-2021.4/kali-linux-2021.4-installer-amd64.iso"
       ],
       "output_directory": "Kali_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
