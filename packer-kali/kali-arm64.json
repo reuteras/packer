@@ -1,0 +1,87 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<esc><wait>",
+        "/install.arm/vmlinuz<wait>",
+        " auto<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=sv<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US<wait>",
+        " fb=false<wait>",
+        " initrd=/install.arm/initrd.gz<wait>",
+        " kbd-chooser/method=sv<wait>",
+        " netcfg/choose_interface=eth0<wait>",
+        " console-keymaps-at/keymap=sv<wait>",
+        " keyboard-configuration/xkb-keymap=sv<wait>",
+        " keyboard-configuration/layout=Sweden<wait>",
+        " keyboard-configuration/variant=Sweden<wait>",
+        " locale=en_US<wait>",
+        " netcfg/get_domain=vm<wait>",
+        " netcfg/get_hostname=kali<wait>",
+        " grub-installer/bootdev=/dev/sda<wait>",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg auto=true priority=critical",
+        " -- <wait>",
+        "<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 51200,
+      "guest_os_type": "arm-other5xlinux-64",
+      "headless": false,
+      "http_directory": "http",
+      "iso_checksum": "sha256:f323da6783522ae1038bddeae8025f419c1f6e6a4977ad79dcf50dd794476d46",
+      "iso_urls": [
+        "https://cdimage.kali.org/kali-2021.4/kali-linux-2021.4-installer-arm64.iso"
+      ],
+      "output_directory": "Kali_64-bit.vmwarevm",
+      "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
+      "ssh_password": "password",
+      "ssh_port": 22,
+      "ssh_timeout": "8000s",
+      "ssh_username": "kali",
+      "type": "vmware-iso",
+      "vm_name": "Kali_64-bit",
+      "vmx_data": {
+        "annotation": "Packer version: {{ packer_version }}|0AVM creation time: {{ isotime \"2006-01-02 15:04:05\" }}",
+        "cpuid.coresPerSocket": "1",
+        "memsize": "4096",
+        "numvcpus": "2"
+      }
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "inline": [
+          "vmrun -T fusion snapshot Kali_64-bit.vmwarevm/Kali_64-bit.vmx Installed"
+        ],
+        "type": "shell-local"
+      }
+    ]
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/kali-tools-kali.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh",
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "password": "",
+    "username": ""
+  }
+}
+

@@ -4,6 +4,9 @@ all: kali-full
 kali:
 	packer build kali.json
 
+kali-arm:
+	packer build kali-arm64.json
+
 kali-full:
 	make validate-kali
 	packer build kali.json
