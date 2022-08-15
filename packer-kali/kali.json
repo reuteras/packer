@@ -32,9 +32,9 @@
       "guest_os_type": "debian8-64",
       "headless": false,
       "http_directory": "http",
-      "iso_checksum": "sha256:fa28a2cd45f43e654db0aaf4856f505fd721de44bc3c4b7e8e823919899156e0",
+      "iso_checksum": "sha256:ae977f455924f0268fac437d66e643827089b6f8dc5d76324d6296eb11d997fd",
       "iso_urls": [
-        "https://cdimage.kali.org/kali-2022.2/kali-linux-2022.2-installer-amd64.iso"
+        "https://cdimage.kali.org/kali-2022.3/kali-linux-2022.3-installer-amd64.iso"
       ],
       "output_directory": "Kali_64-bit.vmwarevm",
       "shutdown_command": "echo 'password'|sudo -S shutdown -P now",
