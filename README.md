@@ -8,7 +8,7 @@ Install VMware Workstation, [packer][pai] and git. My recommendation is to insta
 
     winget install Git.Git
 
-You have to add *C:\Program Files\Git\bin* to the Path environment variable. 
+You have to add *C:\Program Files\Git\bin* to the Path environment variable.
 
 Then start a new terminal and run:
 
