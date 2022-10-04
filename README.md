@@ -96,13 +96,13 @@ There will be bugs so please file a report when you find them.
 <a href="https://www.buymeacoffee.com/reuteras" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 
-    [deb]: https://debian.org
-    [kal]: https://www.kali.org
-    [kat]: https://github.com/reuteras/kali-tools
-    [mal]: https://github.com/reuteras/malir
-    [pai]: https://www.packer.io/downloads
-    [pbe]: https://www.vgemba.net/vmware/Packer-Workstation-Error
-    [rem]: https://remnux.org
-    [sif]: https://digital-forensics.sans.org/community/downloads/
-    [w10]: https://www.microsoft.com/en-us/windows
-    [wse]: https://www.microsoft.com/en-us/cloud-platform/windows-server
+  [deb]: https://debian.org
+  [kal]: https://www.kali.org
+  [kat]: https://github.com/reuteras/kali-tools
+  [mal]: https://github.com/reuteras/malir
+  [pai]: https://www.packer.io/downloads
+  [pbe]: https://www.vgemba.net/vmware/Packer-Workstation-Error
+  [rem]: https://remnux.org
+  [sif]: https://digital-forensics.sans.org/community/downloads/
+  [w10]: https://www.microsoft.com/en-us/windows
+  [wse]: https://www.microsoft.com/en-us/cloud-platform/windows-server
