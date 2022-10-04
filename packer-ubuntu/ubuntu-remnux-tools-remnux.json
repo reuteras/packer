@@ -72,7 +72,7 @@
     },
     {
       "execute_command": "echo 'password' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/remnux-tools-cleanup.sh",
+      "script": "scripts/cleanup.sh",
       "type": "shell"
     },
     {
