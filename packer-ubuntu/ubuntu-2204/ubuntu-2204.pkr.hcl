@@ -75,7 +75,7 @@ source "vmware-iso" "ubuntu-2204" {
   memory           = "${var.memory}"
   cpus             = "${var.cpus}"
   vmx_data = {
-    annotation                = "Packer version: ${packer.version}|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}\nUsername: ${var.ssh_username}\nPassword: ${var.ssh_password}"
+    annotation                = "Packer version: ${packer.version}|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}. Username: ${var.ssh_username} , password: ${var.ssh_password}"
   }
 }
 
