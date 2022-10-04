@@ -12,3 +12,7 @@ else
     echo "remnux        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 fi
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
+
+if [[ -e /etc/update-manager/release-upgrades ]]; then
+    sed -i "s/Prompt=lts/Prompt=never/" /etc/update-manager/release-upgrades
+fi

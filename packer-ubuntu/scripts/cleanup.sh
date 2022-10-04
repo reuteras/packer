@@ -2,8 +2,11 @@
 
 # Delete unneeded files.
 rm -f "$HOME"/*.sh
-rm -f "$HOME"/linux.iso
 rm -f "$HOME"/examples.desktop
+rm -f /tmp/remnux-tools.log
+
+# Remove unneeded packages
+apt-get remove -y gnome-initial-setup
 
 # Clean
 sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq autoremove
