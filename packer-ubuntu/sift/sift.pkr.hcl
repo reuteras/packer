@@ -102,7 +102,7 @@ build {
     scripts         = [
         "../scripts/remnux-tools-sift.sh",
         "../scripts/fix-sift.sh",
-        "../scripts/user-setup.sh"
+        "../../scripts/user-setup.sh"
     ]
   }
   

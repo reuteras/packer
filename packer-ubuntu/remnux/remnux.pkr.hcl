@@ -102,7 +102,7 @@ build {
     scripts         = [
         "../scripts/remnux-tools-remnux.sh",
         "../scripts/fix-remnux.sh",
-        "../scripts/user-setup.sh"
+        "../../scripts/user-setup.sh"
     ]
   }
   

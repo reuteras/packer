@@ -96,7 +96,7 @@ build {
     scripts         = [
         "../scripts/malcolm.sh",
         "../scripts/fix-malcolm.sh",
-        "../scripts/user-setup.sh"
+        "../../scripts/user-setup.sh"
     ]
   }
   

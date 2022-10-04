@@ -95,7 +95,7 @@ build {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
         "../scripts/act-clean-ubuntu_2204.sh",
-        "../scripts/user-setup.sh"
+        "../../scripts/user-setup.sh"
     ]
   }
   
