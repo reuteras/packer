@@ -65,24 +65,24 @@ source "vmware-iso" "ubuntu-2004" {
     " keyboard-configuration/variant=Sweden",
     "<enter><wait>"
   ]
-  boot_wait        = "10s"
-  disk_size        = "${var.disk_size}"
-  guest_os_type    = "ubuntu64Guest"
-  headless         = "${var.headless}"
-  http_directory   = "../http"
-  iso_checksum     = "${var.iso_checksum_ubuntu_2004}"
-  iso_urls         = "${var.iso_urls_ubuntu_2004}"
-  output_directory = "${var.vm_name}"
-  shutdown_command = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
-  ssh_password     = "${var.ssh_password}"
-  ssh_port         = 22
-  ssh_timeout      = "8000s"
-  ssh_username     = "${var.ssh_username}"
-  vm_name          = "${var.vm_name}"
-  memory           = "${var.memory}"
-  cpus             = "${var.cpus}"
+  boot_wait         = "10s"
+  disk_size         = "${var.disk_size}"
+  guest_os_type     = "ubuntu64Guest"
+  headless          = "${var.headless}"
+  http_directory    = "../http"
+  iso_checksum      = "${var.iso_checksum_ubuntu_2004}"
+  iso_urls          = "${var.iso_urls_ubuntu_2004}"
+  output_directory  = "${var.vm_name}"
+  shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
+  ssh_password      = "${var.ssh_password}"
+  ssh_port          = 22
+  ssh_timeout       = "8000s"
+  ssh_username      = "${var.ssh_username}"
+  vm_name           = "${var.vm_name}"
+  memory            = "${var.memory}"
+  cpus              = "${var.cpus}"
   vmx_data = {
-    annotation                = "Packer version: ${packer.version}|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}. Username: ${var.ssh_username} , password: ${var.ssh_password}"
+    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
   }
 }
 

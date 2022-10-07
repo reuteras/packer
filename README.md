@@ -1,39 +1,53 @@
 # Packer
 
-This repo contains scripts to build virtual machines on macOS with VMware Fusion and on Windows with VMware Workstation. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested.
+This repo contains scripts and configuration to build virtual machines on macOS and Windows with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested. Since VMware Fusion for arm is in beta no real effort is made to support that plattform.
 
 ## Instructions on Windows
 
-Install VMware Workstation, [packer][pai] and git. My recommendation is to install git with the command **winget**. Run the following in a Windows Terminal:
+To get started install VMware Workstation, [packer][pai] and git. My recommendation is to install git with the command **winget**. Run the following in a Windows Terminal:
 
     winget install Git.Git
 
 You have to add *C:\Program Files\Git\bin* to the Path environment variable.
 
-Then start a new terminal and run:
+Then start a new terminal and change to folder where you like to check out the repo. Then use git to check it out and configure some defaults.
 
     git clone https://github.com/reuteras/packer.git
     cd packer
     # Open and configure the default values
     <editor> defaults.ps1
 
+To build a VM use **cd** to change to the folder for base image you would like to use. The following are available for Windows
 
-### Images based on Ubuntu 20.04
+- packer-centos
+- packer-kali
+- packer-ubuntu
 
-Configuration for the images based on Ubuntu 20.04 is done in *packer/variables-ubuntu-2004.pkr.hcl* for images based on Ubuntu 20.04 LTS.
+### CentOS
 
-Images based on Ubuntu 20.04
+- centos-7 - CentOS 7 - build with **./build-centos-7.ps1**
+- centos-8-stream - CentOS 8 Stream - build with **./build-centos-8-stream.ps1**
 
-- Ubuntu 20.04 default
-- [REMnux][rem] installed via my repo [remnux-tools][ret]
-- [SIFT][sif] installed via my repo [remnux-tools][ret]
+### Kali
 
-### Images based on Ubuntu 22.04
+- kali - my repo [kali-tools][kat] is used to do a very basic installation of [Kali][kal] - build with **./build-kali.ps1**
 
-Configuration for the images based on Ubuntu 22.04 is done in *packer/variables-ubuntu-2204.pkr.hcl* for images based on Ubuntu 22.04 LTS.
+### Images based on Ubuntu
 
-- Ubuntu 22.04 default
-- Malcolm - Malcolm is not installed but my repo [malir][mal] is added to help with the installation.
+Configuration for the images based on Ubuntu 20.04 is done in *variables-ubuntu-2004.pkr.hcl* for images based on Ubuntu 20.04 LTS.
+
+Images based on Ubuntu 20.04.
+
+- Ubuntu 20.04 default - build with **./build-ubuntu-2004.ps1**
+- [REMnux][rem] installed via my repo [remnux-tools][ret] - build with **./build-remnux.ps1**
+- [SIFT][sif] installed via my repo [remnux-tools][ret] - build with **./build-sift.ps1**
+
+Configuration for the images based on Ubuntu 22.04 is done in *variables-ubuntu-2204.pkr.hcl* for images based on Ubuntu 22.04 LTS.
+
+Images based on Ubuntu 22.04.
+
+- Ubuntu 22.04 default - build with **./build-ubuntu-2204.ps1**
+- Malcolm - Malcolm is not installed but my repo [malir][mal] is added to help with the installation - build with **./build-malcolm.ps1**
 
 ## Instructions on macOS
 
