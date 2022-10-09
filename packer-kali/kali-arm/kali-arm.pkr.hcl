@@ -50,8 +50,9 @@ variable "vm_name" {
 
 source "vmware-iso" "kali" {
   boot_command     = [
-    "c<wait>", 
-    "/install.a64/vmlinuz<wait>",
+    "c<wait>",
+    "setparams 'Install'<wait><enter>",
+    "linux /install.a64/vmlinuz<wait>",
     " auto<wait>",
     " console-setup/ask_detect=false<wait>",
     " console-setup/layoutcode=sv<wait>",
@@ -65,20 +66,21 @@ source "vmware-iso" "kali" {
     " keyboard-configuration/xkb-keymap=sv<wait>",
     " keyboard-configuration/layout=Sweden<wait>",
     " keyboard-configuration/variant=Sweden<wait>",
+    " grub-installer/bootdev=/dev/nvme0n1<wait>",
     " locale=en_US<wait>",
     " netcfg/get_domain=vm<wait>",
     " netcfg/get_hostname=kali<wait>",
-    " grub-installer/bootdev=/dev/sda<wait>",
-    " noapic<wait>",
     " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg auto=true priority=critical",
-    " -- <wait>",
-    "<enter><wait>"
+    " --- quiet <wait>",
+    "<enter><wait>",
+    "initrd /install.a64/initrd.gz<enter>",
+    "boot<enter>"
   ]
   boot_wait         = "5s"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "arm-debian12-64"
   headless          = "${var.headless}"
-  http_directory    = "../http"
+  http_directory    = "http"
   iso_checksum      = "${var.iso_checksum_kali}"
   iso_urls          = "${var.iso_urls_kali}"
   output_directory  = "${var.vm_name}"
