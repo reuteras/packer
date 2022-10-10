@@ -1,6 +1,6 @@
 variable "cpus" {
   type    = string
-  default = "2"
+  default = "6"
 }
 
 variable "disk_size" {
