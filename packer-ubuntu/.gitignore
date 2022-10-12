@@ -2,3 +2,4 @@
 *.vmwarevm
 *.ova
 packer_cache
+sift/SIfT
