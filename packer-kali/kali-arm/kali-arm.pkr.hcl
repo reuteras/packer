@@ -60,16 +60,15 @@ source "vmware-iso" "kali" {
     " debconf/frontend=noninteractive<wait>",
     " debian-installer=en_US<wait>", " fb=false<wait>",
     " initrd=/install.a64/initrd.gz<wait>",
-    " kbd-chooser/method=sv<wait>",
     " netcfg/choose_interface=eth0<wait>",
+    " kbd-chooser/method=sv<wait>",
     " console-keymaps-at/keymap=sv<wait>",
     " keyboard-configuration/xkb-keymap=sv<wait>",
     " keyboard-configuration/layout=Sweden<wait>",
-    " keyboard-configuration/variant=Sweden<wait>",
-    " grub-installer/bootdev=/dev/nvme0n1<wait>",
-    " locale=en_US<wait>",
+    " grub-installer/bootdev=default<wait>",
     " netcfg/get_domain=vm<wait>",
     " netcfg/get_hostname=kali<wait>",
+    " locale=en_US<wait>",
     " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg auto=true priority=critical",
     " --- quiet <wait>",
     "<enter><wait>",
@@ -95,6 +94,9 @@ source "vmware-iso" "kali" {
   snapshot_name     = "Installed"
   disk_adapter_type = "nvme"
   disk_type_id      = "0"
+  network           = "nat"
+  network_adapter_type = "e1000"
+  sound             = "false"
   usb               = "true"
   version           = "19"
   cdrom_adapter_type = "sata"
