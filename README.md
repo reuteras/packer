@@ -1,6 +1,6 @@
 # Packer
 
-This repo contains scripts and configuration to build virtual machines on macOS and Windows with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested. Since VMware Fusion for arm is in beta no real effort is made to support that plattform.
+This repo contains scripts and configuration to build virtual machines on macOS and Windows with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested. Since VMware Fusion for arm is in beta no real effort is made to support that platform.
 
 ## Instructions on Windows
 
@@ -8,7 +8,7 @@ To get started install VMware Workstation, [packer][pai] and git. My recommendat
 
     winget install Git.Git
 
-You have to add *C:\Program Files\Git\bin* to the Path environment variable.
+You have to add *C:\Program Files\Git\bin* to the Path environment variable. Also make sure that you have VMware in the path, *C:\Program Files (x86)\VMware\VMware Workstation*.
 
 Then start a new terminal and change to folder where you like to check out the repo. Then use git to check it out and configure some defaults.
 
