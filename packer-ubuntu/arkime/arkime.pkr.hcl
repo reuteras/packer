@@ -38,6 +38,8 @@ source "vmware-iso" "arkime" {
   ssh_port         = 22
   ssh_timeout      = "8000s"
   ssh_username     = "malware"
+  usb              = "true"
+  snapshot_name    = "Installed"
   vm_name          = "Arkime_64-bit"
   vmx_data = {
     annotation                = "Packer version: ${packer.version}|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}"
@@ -69,9 +71,5 @@ build {
     script          = [
         "../scripts/remnux-tools-cleanup.sh"
     ]
-  }
-
-  post-processor "shell-local" {
-    inline = ["vmrun -T ws snapshot Arkime_64-bit/Arkime_64-bit.vmx Installed"]
   }
 }

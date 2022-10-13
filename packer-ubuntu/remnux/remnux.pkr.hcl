@@ -81,6 +81,8 @@ source "vmware-iso" "ubuntu-2004" {
   vm_name           = "${var.vm_name}"
   memory            = "${var.memory}"
   cpus              = "${var.cpus}"
+  usb               = "true"
+  snapshot_name     = "Installed"
   vmx_data = {
     "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
   }
@@ -111,9 +113,5 @@ build {
     scripts         = [
         "../scripts/cleanup.sh"
     ]
-  }
-
-  post-processor "shell-local" {
-    inline = ["vmrun -T ws snapshot ${var.vm_name}/${var.vm_name}.vmx Installed"]
   }
 }
