@@ -95,7 +95,7 @@ source "vmware-iso" "kali" {
   disk_adapter_type = "nvme"
   disk_type_id      = "0"
   network           = "nat"
-  network_adapter_type = "e1000"
+  network_adapter_type = "vmxnet3"
   sound             = "false"
   usb               = "true"
   version           = "19"
