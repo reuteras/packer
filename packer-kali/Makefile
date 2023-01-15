@@ -4,8 +4,8 @@ all: kali-full
 kali:
 	packer build kali.json
 
-kali-arm:
-	packer build kali-arm64.json
+build-kali-arm:
+	cd kali-arm && packer build -force -var-file ../variables-kali-arm.pkr.hcl kali-arm.pkr.hcl 
 
 kali-full:
 	make validate-kali
