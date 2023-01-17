@@ -18,12 +18,12 @@ variable "hostname" {
   default = "ubuntu"
 }
 
-variable "iso_checksum_ubuntu_2204" {
+variable "iso_checksum_ubuntu_2004" {
   type    = string
   default = ""
 }
 
-variable "iso_urls_ubuntu_2204" {
+variable "iso_urls_ubuntu_2004" {
   type    = list(string)
   default = []
 }
@@ -48,7 +48,7 @@ variable "vm_name" {
   default = "Ubuntu_20.04_64-bit"
 }
 
-source "vmware-iso" "ubuntu-2204" {
+source "vmware-iso" "ubuntu-2004" {
   boot_command     = [
     "<tab>",
     " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
@@ -70,8 +70,8 @@ source "vmware-iso" "ubuntu-2204" {
   guest_os_type     = "ubuntu64Guest"
   headless          = "${var.headless}"
   http_directory    = "../http"
-  iso_checksum      = "${var.iso_checksum_ubuntu_2204}"
-  iso_urls          = "${var.iso_urls_ubuntu_2204}"
+  iso_checksum      = "${var.iso_checksum_ubuntu_2004}"
+  iso_urls          = "${var.iso_urls_ubuntu_2004}"
   output_directory  = "${var.vm_name}"
   shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
   ssh_password      = "${var.ssh_password}"
@@ -89,7 +89,7 @@ source "vmware-iso" "ubuntu-2204" {
 }
 
 build {
-  sources = ["source.vmware-iso.ubuntu-2204"]
+  sources = ["source.vmware-iso.ubuntu-2004"]
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
@@ -102,7 +102,7 @@ build {
   provisioner "shell" {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
-        "../scripts/act-clean-ubuntu_2204.sh",
+        "../scripts/act-clean-ubuntu_2004.sh",
         "../../scripts/user-setup.sh"
     ]
   }
