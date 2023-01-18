@@ -101,8 +101,43 @@ source "vmware-iso" "kali" {
   version           = "19"
   cdrom_adapter_type = "sata"
   vmx_data = {
-    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
-    "mks.enable3d"  : "TRUE"
+    "annotation"    = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+    "mks.enable3d"  = "TRUE"
+    "gui.fitGuestUsingNativeDisplayResolution" = "FALSE"
+    "tools.upgrade.policy"                     = "manual"
+    "smc.present"                              = "TRUE"
+    "smbios.restrictSerialCharset"             = "TRUE"
+    "ulm.disableMitigations"                   = "TRUE"
+    "ich7m.present"                            = "TRUE"
+    "hw.model.reflectHost"                     = "FALSE"
+    "smbios.reflectHost"                       = "FALSE"
+    "serialNumber.reflectHost"                 = "FALSE"
+    "SMBIOS.use12CharSerialNumber"             = "TRUE"
+    "usb_xhci:4.deviceType"                    = "hid"
+    "usb_xhci:4.parent"                        = "-1"
+    "usb_xhci:4.port"                          = "4"
+    "usb_xhci:4.present"                       = "TRUE"
+    "usb_xhci:6.deviceType"                    = "hub"
+    "usb_xhci:6.parent"                        = "-1"
+    "usb_xhci:6.port"                          = "6"
+    "usb_xhci:6.present"                       = "TRUE"
+    "usb_xhci:6.speed"                         = "2"
+    "usb_xhci:7.deviceType"                    = "hub"
+    "usb_xhci:7.parent"                        = "-1"
+    "usb_xhci:7.port"                          = "7"
+    "usb_xhci:7.present"                       = "TRUE"
+    "usb_xhci:7.speed"                         = "4"
+    "usb_xhci.pciSlotNumber"                   = "192"
+    "usb_xhci.present"                         = "TRUE"
+    "hgfs.linkRootShare"                       = "FALSE"
+  }
+  vmx_data_post = {
+    "sata0:0.autodetect"     = "TRUE"
+    "sata0:0.deviceType"     = "cdrom-raw"
+    "sata0:0.fileName"       = "auto detect"
+    "sata0:0.startConnected" = "FALSE"
+    "sata0:0.present"        = "TRUE"
+    "vhv.enable"             = "TRUE"
   }
 }
 
