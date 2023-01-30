@@ -12,13 +12,14 @@ fi
 
 shopt -s nullglob
 
-for vm in [A-Z]*.vmwarevm ; do
+while IFS= read -r vm_path; do
+    vm=$(echo "$vm_path" | sed -E "s#.*/##")
     echo "Installing $vm"
     if [[ -d "$VMHOME/$vm" ]]; then
         echo "$VMHOME/$vm already exists! Will not overwrite."
     else
-        mv "$vm" "$VMHOME/"
+        mv "$vm_path" "$VMHOME/"
         open "$VMHOME/$vm"/*.vmx || true
     fi
-done
+done < <(find -E . -type d -a -regex ".*[A-Z].+")
 
