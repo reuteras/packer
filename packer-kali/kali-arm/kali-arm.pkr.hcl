@@ -45,7 +45,7 @@ variable "ssh_username" {
 
 variable "vm_name" {
   type    = string
-  default = "Kali"
+  default = "Kali_64-bit_arm"
 }
 
 source "vmware-iso" "kali" {
@@ -89,7 +89,7 @@ source "vmware-iso" "kali" {
   ssh_timeout       = "8000s"
   ssh_username      = "${var.ssh_username}"
   vm_name           = "${var.vm_name}"
-  memory            = 4096
+  memory            = "${var.memory}"
   cpus              = "${var.cpus}"
   snapshot_name     = "Installed"
   disk_adapter_type = "nvme"
@@ -101,18 +101,9 @@ source "vmware-iso" "kali" {
   version           = "19"
   cdrom_adapter_type = "sata"
   vmx_data = {
-    "annotation"    = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
-    "mks.enable3d"  = "TRUE"
-    "gui.fitGuestUsingNativeDisplayResolution" = "FALSE"
-    "tools.upgrade.policy"                     = "manual"
-    "smc.present"                              = "TRUE"
-    "smbios.restrictSerialCharset"             = "TRUE"
-    "ulm.disableMitigations"                   = "TRUE"
-    "ich7m.present"                            = "TRUE"
-    "hw.model.reflectHost"                     = "FALSE"
-    "smbios.reflectHost"                       = "FALSE"
-    "serialNumber.reflectHost"                 = "FALSE"
-    "SMBIOS.use12CharSerialNumber"             = "TRUE"
+    "annotation"                                = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+    "config.version"                            = "8"
+    "tools.upgrade.policy"                      = "upgradeAtPowerCycle"
     "usb_xhci:4.deviceType"                    = "hid"
     "usb_xhci:4.parent"                        = "-1"
     "usb_xhci:4.port"                          = "4"
@@ -129,7 +120,6 @@ source "vmware-iso" "kali" {
     "usb_xhci:7.speed"                         = "4"
     "usb_xhci.pciSlotNumber"                   = "192"
     "usb_xhci.present"                         = "TRUE"
-    "hgfs.linkRootShare"                       = "FALSE"
   }
   vmx_data_post = {
     "sata0:0.autodetect"     = "TRUE"
@@ -137,7 +127,6 @@ source "vmware-iso" "kali" {
     "sata0:0.fileName"       = "auto detect"
     "sata0:0.startConnected" = "FALSE"
     "sata0:0.present"        = "TRUE"
-    "vhv.enable"             = "TRUE"
   }
 }
 
