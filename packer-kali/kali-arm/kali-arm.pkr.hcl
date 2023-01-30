@@ -89,7 +89,7 @@ source "vmware-iso" "kali" {
   ssh_timeout       = "8000s"
   ssh_username      = "${var.ssh_username}"
   vm_name           = "${var.vm_name}"
-  memory            = "${var.memory}"
+  memory            = 4096
   cpus              = "${var.cpus}"
   snapshot_name     = "Installed"
   disk_adapter_type = "nvme"
