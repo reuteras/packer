@@ -27,6 +27,13 @@ ubuntu-20.04:
 	packer validate ubuntu-20.04.json
 	packer build ubuntu-20.04.json
 
+ubuntu-22.04:
+	packer validate ubuntu-22.04.json
+	packer build ubuntu-22.04.json
+
+build-ubuntu-2204-arm:
+	cd ubuntu-2204-arm && packer build -force -var-file ../variables-ubuntu-2204-arm.pkr.hcl ubuntu-2204-arm.pkr.hcl
+
 ubuntu-timesketch:
 	packer validate ubuntu-timesketch.json
 	packer build ubuntu-timesketch.json
