@@ -1,16 +1,5 @@
 #cloud-config
 autoinstall:
-  apt:
-    disable_components: []
-    geoip: true
-    preserve_sources_list: false
-  #  primary:
-  #  - arches:
-  #    - default
-  #    uri: http://se.archive.ubuntu.com/ubuntu
-  #  - arches:
-  #    - default
-  #    uri: http://ports.ubuntu.com/ubuntu-ports
   drivers:
     install: false
   identity:
