@@ -5,7 +5,7 @@ moloch: arkime
 arkime: ubuntu-18.04-arkime
 
 build-malcolm-arm:
-	cd malcolm && packer build -force -var-file ../variables-ubuntu-2204.pkr.hcl malcolm-arm.pkr.hcl
+	cd malcolm && packer build -force -var-file ../variables-ubuntu-2204-arm.pkr.hcl malcolm-arm.pkr.hcl
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json

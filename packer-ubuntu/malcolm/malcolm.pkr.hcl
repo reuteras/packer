@@ -50,7 +50,7 @@ variable "vm_name" {
 
 source "vmware-iso" "ubuntu-2204" {
   boot_command     = [
-    "c<wait>",
+    "<wait><wait>c<wait>",
     "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net;seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/\"",
     "<enter><wait>",
     "initrd /casper/initrd",
@@ -58,7 +58,7 @@ source "vmware-iso" "ubuntu-2204" {
     "boot",
     "<enter>"
   ]
-  boot_wait         = "5s"
+  boot_wait         = "15s"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "ubuntu64Guest"
   headless          = "${var.headless}"
