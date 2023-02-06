@@ -18,12 +18,12 @@ variable "hostname" {
   default = "ubuntu"
 }
 
-variable "iso_checksum_ubuntu_2204" {
+variable "iso_checksum_ubuntu_2204_arm" {
   type    = string
   default = ""
 }
 
-variable "iso_urls_ubuntu_2204" {
+variable "iso_urls_ubuntu_2204_arm" {
   type    = list(string)
   default = []
 }
@@ -63,8 +63,8 @@ source "vmware-iso" "ubuntu-2204" {
   guest_os_type     = "arm-ubuntu-64"
   headless          = "${var.headless}"
   http_directory    = "http"
-  iso_checksum      = "${var.iso_checksum_ubuntu_2204}"
-  iso_urls          = "${var.iso_urls_ubuntu_2204}"
+  iso_checksum      = "${var.iso_checksum_ubuntu_2204_arm}"
+  iso_urls          = "${var.iso_urls_ubuntu_2204_arm}"
   output_directory  = "${var.vm_name}"
   shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
   ssh_password      = "${var.ssh_password}"
