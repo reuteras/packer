@@ -58,7 +58,7 @@ source "vmware-iso" "ubuntu-2204" {
     "boot",
     "<enter>"
   ]
-  boot_wait         = "10s"
+  boot_wait         = "5s"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "ubuntu64Guest"
   headless          = "${var.headless}"
