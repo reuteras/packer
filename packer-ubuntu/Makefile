@@ -3,9 +3,9 @@ all: sift remnux arkime ubuntu
 ubuntu: ubuntu-20.04
 moloch: arkime
 arkime: ubuntu-18.04-arkime
-hunter: ubuntu-16.04-hybrid-hunter
-so: ubuntu-16.04-security_onion
-timesketch: ubuntu-timesketch
+
+build-malcolm-arm:
+	cd malcolm && packer build -force -var-file ../variables-ubuntu-2204.pkr.hcl malcolm-arm.pkr.hcl
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
@@ -31,17 +31,11 @@ ubuntu-22.04:
 	packer validate ubuntu-22.04.json
 	packer build ubuntu-22.04.json
 
+build-ubuntu-2004-arm:
+	cd ubuntu-2004-arm && packer build -force -var-file ../variables-ubuntu-2004.pkr.hcl ubuntu-2004-arm.pkr.hcl
+
 build-ubuntu-2204-arm:
-	cd ubuntu-2204-arm && packer build -force -var-file ../variables-ubuntu-2204-arm.pkr.hcl ubuntu-2204-arm.pkr.hcl
-
-ubuntu-timesketch:
-	packer validate ubuntu-timesketch.json
-	packer build ubuntu-timesketch.json
-
-ubuntu-timesketch-ova:
-	packer validate ubuntu-timesketch.json
-	packer build ubuntu-timesketch.json
-	/Applications/VMware\ OVF\ Tool/ovftool Ubuntu_Timesketch_64-bit.vmwarevm/Ubuntu_Timesketch_64-bit.vmx timesketch.ova
+	cd ubuntu-2204-arm && packer build -force -var-file ../variables-ubuntu-2204.pkr.hcl ubuntu-2204-arm.pkr.hcl
 
 ubuntu-18.04-arkime:
 	packer validate ubuntu-18.04-arkime.json
@@ -79,8 +73,6 @@ clean:
 	make clean-sift
 	make clean-ubuntu
 	make clean-ubuntu-16.04
-	make clean-ubuntu-16.04-hybrid-hunter
-	make clean-ubuntu-16.04-security_onion
 	make clean-ubuntu-18.04
 	make clean-ubuntu-18.04-arkime
 	make clean-ubuntu-20.04
@@ -98,20 +90,11 @@ clean-ubuntu:
 clean-ubuntu-16.04:
 	rm -rf Ubuntu_1604_64-bit.vmwarevm
 
-clean-ubuntu-16.04-hybrid-hunter:
-	rm -rf Hybrid_Hunter.vmwarevm
-
-clean-ubuntu-16.04-security_onion:
-	rm -rf Security_Onion.vmwarevm
-
 clean-ubuntu-18.04:
 	rm -rf Ubuntu_1804_64-bit.vmwarevm
 
 clean-ubuntu-20.04:
 	rm -rf Ubuntu_2004_64-bit.vmwarevm
-
-clean-ubuntu-timesketch:
-	rm -rf Ubuntu_Timesketch_64-bit.vmwarevm timesketch.ova
 
 clean-ubuntu-18.04-arkime:
 	rm -rf Ubuntu_arkime.vmwarevm
