@@ -3,3 +3,5 @@
 *.ova
 packer_cache
 sift/SIfT
+ubuntu-2204-arm/Ubuntu*
+ubuntu-2004-arm/Ubuntu*
