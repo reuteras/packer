@@ -16,12 +16,7 @@ autoinstall:
   locale: en_US.UTF-8
   packages:
     - openssh-server
-    - open-vm-tools
     - cloud-init
-    - whois
-    - zsh
-    - wget
-    - tasksel
   early-commands:
     # otherwise packer tries to connect and exceed max attempts:
       - systemctl stop ssh

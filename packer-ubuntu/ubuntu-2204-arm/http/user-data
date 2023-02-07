@@ -19,8 +19,6 @@ autoinstall:
     - open-vm-tools
     - cloud-init
     - whois
-    - zsh
-    - wget
     - tasksel
   early-commands:
     # otherwise packer tries to connect and exceed max attempts:
