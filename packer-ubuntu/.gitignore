@@ -1,7 +1,8 @@
 *.iso
 *.vmwarevm
 *.ova
+arkime/Arkime*
 packer_cache
-sift/SIfT
+sift/SIFT*
 ubuntu-2204-arm/Ubuntu*
 ubuntu-2004-arm/Ubuntu*
