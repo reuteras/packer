@@ -13,4 +13,4 @@ fi
 
 git clone https://github.com/reuteras/vmbin.git ~/src/vmbin
 cp ~/src/vmbin/* ~/bin
-rm ~/bin/README.md ~/bin/LICENSE
+rm -f ~/bin/README.md ~/bin/LICENSE
