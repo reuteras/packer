@@ -1,6 +1,9 @@
 CHECKPOINT_DISABLE ?= 1
 all: debian
 
+build-debian-arm:
+	cd debian-arm && packer build -force -var-file ../variables-debian-arm.pkr.hcl debian-arm.pkr.hcl
+
 cuckoo:
 	make validate-cuckoo
 	packer build -var-file=debian-vars.jsondebian-cuckoo.json
