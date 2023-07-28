@@ -67,7 +67,7 @@ source "vmware-iso" "ubuntu-2004" {
   ]
   boot_wait         = "10s"
   disk_size         = "${var.disk_size}"
-  guest_os_type     = "ubuntu64Guest"
+  guest_os_type     = "ubuntu-64"
   headless          = "${var.headless}"
   http_directory    = "../http"
   iso_checksum      = "${var.iso_checksum_ubuntu_2004}"
