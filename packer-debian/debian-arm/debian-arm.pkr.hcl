@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = "~> 1"
+    }
+  }
+}
+
 variable "cpus" {
   type    = string
   default = "2"
@@ -50,11 +59,15 @@ variable "vm_name" {
 
 source "vmware-iso" "debian" {
   boot_command     = [
-    "<wait>c<wait>",
+    "<wait><wait><wait>c<wait><wait><wait>",
     "linux /install.a64/vmlinuz ",
     "auto=true ",
+    "language=en ",
+    "country=SV ",
+    "locale=en_US.UTF-8 ",
+    "keymap=se ",
     "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-    "hostname=debian ",
+    "hostname=${var.hostname} ",
     "domain=localdomain ",
     "interface=auto ",
     "vga=788 noprompt quiet --<enter>",

@@ -5,14 +5,14 @@ rm -f /home/cuckoo/*.sh
 rm -f /home/*/linux.iso
 
 # Run clean
-sudo apt-get -y autoremove
-sudo apt-get autoclean
-sudo apt-get clean
+#sudo apt-get -y autoremove
+#sudo apt-get autoclean
+#sudo apt-get clean
 
-dd if=/dev/zero of="$HOME/zero" conv=fsync
+dd if=/dev/zero of="$HOME/zero" conv=fsync || true
 sleep 1
 sync
-rm -f "$HOME"/zero
+rm -f "$HOME"/zero && echo "Removed $HOME/zero"
 
 # Add `sync` so Packer doesn't quit too early, before the large file is deleted.
 sync
