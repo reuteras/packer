@@ -2,8 +2,8 @@
 
 # Install git
 DEBIAN_FRONTEND=noninteractive apt-get -y update
-DEBIAN_FRONTEND=noninteractive apt-get -y install git sudo
 DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -y install sudo
 
 # Add cuckoo user to sudoers.
 echo "cuckoo        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
