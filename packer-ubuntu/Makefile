@@ -35,7 +35,7 @@ build-ubuntu-2004-arm:
 	cd ubuntu-2004-arm && packer build -force -var-file ../variables-ubuntu-2004.pkr.hcl ubuntu-2004-arm.pkr.hcl
 
 build-ubuntu-2204-arm:
-	cd ubuntu-2204-arm && packer build -force -var-file ../variables-ubuntu-2204.pkr.hcl ubuntu-2204-arm.pkr.hcl
+	cd ubuntu-2204-arm && packer build -force -var-file ../variables-ubuntu-2204-arm.pkr.hcl ubuntu-2204-arm.pkr.hcl
 
 ubuntu-18.04-arkime:
 	packer validate ubuntu-18.04-arkime.json
