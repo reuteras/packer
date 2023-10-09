@@ -5,6 +5,6 @@ headless      = false
 ssh_username  = "user"
 ssh_password  = "password"
 
-// Debian 11.6
-iso_checksum_debian = "sha256:e482910626b30f9a7de9b0cc142c3d4a079fbfa96110083be1d0b473671ce08d"
-iso_urls_debian     = ["https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso"]
+// Debian 12.2
+iso_checksum_debian = "sha256:23ab444503069d9ef681e3028016250289a33cc7bab079259b73100daee0af66"
+iso_urls_debian     = ["https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.2.0-amd64-netinst.iso"]
