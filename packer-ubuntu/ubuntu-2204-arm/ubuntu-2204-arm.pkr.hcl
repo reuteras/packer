@@ -51,7 +51,7 @@ variable "vm_name" {
 source "vmware-iso" "ubuntu-2204" {
   boot_command     = [
     "c<wait>",
-    "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net;seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/\"",
+    "linux /casper/vmlinuz autoinstall quiet ds=\"nocloud-net;seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/\"",
     "<enter><wait>",
     "initrd /casper/initrd",
     "<enter><wait>",
@@ -139,5 +139,14 @@ build {
     scripts         = [
         "../scripts/cleanup.sh"
     ]
+  }
+}
+
+packer {
+  required_plugins {
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = "~> 1"
+    }
   }
 }
