@@ -11,7 +11,7 @@ sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 # Install git and open-vm-tools
 apt -y update
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" dist-upgrade -yq
-apt -y install git open-vm-tools haveged
+apt -y install bc git open-vm-tools haveged
 
 # Fix for login issues related to lack of randomness
 # https://bugs.kali.org/view.php?id=4994
