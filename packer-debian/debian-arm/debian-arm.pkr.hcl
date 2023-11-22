@@ -141,7 +141,7 @@ build {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
     scripts         = [
         "../scripts/setup.sh",
-#        "../scripts/setup-debian.sh"
+        "../scripts/setup-debian.sh"
     ]
   }
 

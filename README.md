@@ -62,10 +62,6 @@ Available in the subdirectory **packer-debian** and has two make targets:
 
 - debian - debian.json - install a basic [Debian][deb] host.
 
-### Fedora
-
-- fedora-34 - Fedora 34
-
 ### Kali
 
 - kali - kali.json - my script [kali-tools][kat] to do a very basic install of [Kali][kal].
@@ -83,6 +79,31 @@ Available in **packer-ubuntu** and has three targets:
 [Windows 10][w10] and [server][wse].
 
 - Windows 10
+
+## packerconfig.pkr.hcl
+
+My *packerconfig.pkr.hcl* file contains the following.
+
+```yaml
+packer {
+  required_plugins {
+    digitalocean = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/digitalocean"
+    }
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = "~> 1"
+    }
+  }
+}
+```
+
+To install the dependencies I use the following command (update for your path) on macOS (arm64).
+
+```bash
+packer init -upgrade ~/.packer.d/.packerconfig.pkr.hcl
+```
 
 ## FAQ
 
