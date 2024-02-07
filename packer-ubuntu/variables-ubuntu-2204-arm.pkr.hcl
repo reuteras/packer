@@ -6,5 +6,5 @@ ssh_username  = "malware"
 ssh_password  = "password"
 
 // Ubuntu 22.04 LTS arm
-iso_checksum_ubuntu_2204_arm    = "sha256:72eaa336c14bbaf598e6d6005546ec80741142c3a2ca872ad3a6ec8d07f9652e"
-iso_urls_ubuntu_2204_arm        = ["https://cdimage.ubuntu.com/ubuntu-server/jammy/daily-live/20231221/jammy-live-server-arm64.iso"]
+iso_checksum_ubuntu_2204_arm    = "sha256:78b85dd7936973ecb249d490a05c1c53c7c2e6f8c4a732dde181c201d77206ea"
+iso_urls_ubuntu_2204_arm        = ["https://cdimage.ubuntu.com/ubuntu-server/jammy/daily-live/20240207/jammy-live-server-arm64.iso"]
