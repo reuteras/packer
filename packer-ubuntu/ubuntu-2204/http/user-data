@@ -1,17 +1,5 @@
 #cloud-config
 autoinstall:
-  apt:
-    disable_components: []
-    geoip: true
-    preserve_sources_list: false
-    primary:
-    - arches:
-      - amd64
-      - i386
-      uri: http://se.archive.ubuntu.com/ubuntu
-    - arches:
-      - default
-      uri: http://ports.ubuntu.com/ubuntu-ports
   drivers:
     install: false
   identity:
@@ -31,8 +19,6 @@ autoinstall:
     - open-vm-tools
     - cloud-init
     - whois
-    - zsh
-    - wget
     - tasksel
   early-commands:
     # otherwise packer tries to connect and exceed max attempts:
