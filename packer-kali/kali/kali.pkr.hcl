@@ -30,7 +30,7 @@ variable "iso_urls_kali" {
 
 variable "memory" {
   type    = string
-  default = "4096"
+  default = "8192"
 }
 
 variable "ssh_password" {
@@ -122,3 +122,13 @@ build {
     ]
   }
 }
+
+packer {
+  required_plugins {
+    vmware = {
+      version = "~> 1"
+      source = "github.com/hashicorp/vmware"
+    }
+  }
+}
+
