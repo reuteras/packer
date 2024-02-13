@@ -30,7 +30,7 @@ variable "iso_urls_ubuntu_2204" {
 
 variable "memory" {
   type    = string
-  default = "4096"
+  default = "16392"
 }
 
 variable "ssh_password" {
@@ -58,11 +58,11 @@ source "vmware-iso" "ubuntu-2204" {
     "boot",
     "<enter>"
   ]
-  boot_wait         = "10s"
+  boot_wait         = "3s"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "ubuntu-64"
   headless          = "${var.headless}"
-  http_directory    = "../ubuntu-2204/http"
+  http_directory    = "http"
   iso_checksum      = "${var.iso_checksum_ubuntu_2204}"
   iso_urls          = "${var.iso_urls_ubuntu_2204}"
   output_directory  = "${var.vm_name}"
