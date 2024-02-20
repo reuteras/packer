@@ -1,7 +1,7 @@
 //  variables-ubuntu-2204-arm.pkr.hcl
 
 // Defaults for all Ubuntu installations
-headless      = false
+headless      = "true"
 ssh_username  = "malware"
 ssh_password  = "password"
 
