@@ -9,8 +9,8 @@ variable "disk_size" {
 }
 
 variable "headless" {
-  type    = bool
-  default = false
+  type    = string
+  default = "true"
 }
 
 variable "hostname" {
@@ -49,20 +49,24 @@ variable "vm_name" {
 }
 
 source "vmware-iso" "ubuntu-2204" {
-  boot_command     = [
-    "c<wait>",
-    "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net;seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/\"",
-    "<enter><wait>",
-    "initrd /casper/initrd",
-    "<enter><wait>",
-    "boot",
-    "<enter>"
-  ]
-  boot_wait         = "3s"
+  boot_wait         = "5s"
+  boot_command      = [
+                        "c<wait>",
+                        "linux /casper/vmlinuz --- autoinstall ds=nocloud;",
+                        "<enter><wait>",
+                        "initrd /casper/initrd",
+                        "<enter><wait>",
+                        "boot",
+                        "<enter>"
+                    ]
+  cd_files          = [
+                        "./http/meta-data",
+                        "./http/user-data"
+                    ]
+  cd_label          = "cidata"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "ubuntu-64"
   headless          = "${var.headless}"
-  http_directory    = "http"
   iso_checksum      = "${var.iso_checksum_ubuntu_2204}"
   iso_urls          = "${var.iso_urls_ubuntu_2204}"
   output_directory  = "${var.vm_name}"
