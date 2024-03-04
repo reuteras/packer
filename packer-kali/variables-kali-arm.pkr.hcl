@@ -1,8 +1,8 @@
-//  variables.pkr.hcl
+//  variables-kali-arm.pkr.hcl
 
-// Defaults for Kali
+// Defaults for Kali arm64
 headless          = false
 ssh_username      = "kali"
 ssh_password      = "password"
-iso_checksum_kali = "5cfca5f2c5136d743da4e9235fbfaad515d112115da486db2033d8d1d4c5ee67"
-iso_urls_kali     = ["https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-installer-arm64.iso"]
+iso_checksum_kali = "5da710fac36899ff132cfe5e14c7df594086d2d0d7b3503247d8945aa258eac9"
+iso_urls_kali     = ["https://kali.download/base-images/kali-2024.1/kali-linux-2024.1-installer-arm64.iso"]
