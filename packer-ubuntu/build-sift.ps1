@@ -1,7 +1,7 @@
 # Load defaults
 . ../defaults.ps1
 
-$BASE="ubuntu-2004"
+$BASE="ubuntu-2204"
 $CONF_NAME="sift"
 $VM_DIR_NAME="SIFT"
 

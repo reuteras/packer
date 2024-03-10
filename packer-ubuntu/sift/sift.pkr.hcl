@@ -9,8 +9,8 @@ variable "disk_size" {
 }
 
 variable "headless" {
-  type    = bool
-  default = false
+  type    = string
+  default = "true"
 }
 
 variable "hostname" {
@@ -18,12 +18,12 @@ variable "hostname" {
   default = "sift"
 }
 
-variable "iso_checksum_ubuntu_2004" {
+variable "iso_checksum_ubuntu" {
   type    = string
   default = ""
 }
 
-variable "iso_urls_ubuntu_2004" {
+variable "iso_urls_ubuntu" {
   type    = list(string)
   default = []
 }
@@ -48,30 +48,27 @@ variable "vm_name" {
   default = "SIFT"
 }
 
-source "vmware-iso" "ubuntu-2004" {
-  boot_command     = [
-    "<tab>",
-    " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-    " auto=true",
-    " locale=en_US",
-    " console-setup/ask_detect=false",
-    " console-setup/layoutcode=sv",
-    " console-setup/modelcode=pc105",
-    " debian-installer=en_US",
-    " initrd=/install/initrd.gz",
-    " netcfg/get_hostname=${var.hostname}",
-    " keyboard-configuration/xkb-keymap=sv",
-    " keyboard-configuration/layout=Sweden",
-    " keyboard-configuration/variant=Sweden",
-    "<enter><wait>"
-  ]
+source "vmware-iso" "ubuntu" {
   boot_wait         = "10s"
+  boot_command      = [
+                       "c<wait>",
+                        "linux /casper/vmlinuz --- autoinstall ds=nocloud;",
+                        "<enter><wait>",
+                        "initrd /casper/initrd",
+                        "<enter><wait>",
+                        "boot",
+                        "<enter>"                        
+  					]
+  cd_files          = [
+                        "./http/meta-data",
+                        "./http/user-data"
+                    ]
+  cd_label          = "cidata"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "ubuntu-64"
   headless          = "${var.headless}"
-  http_directory    = "../http"
-  iso_checksum      = "${var.iso_checksum_ubuntu_2004}"
-  iso_urls          = "${var.iso_urls_ubuntu_2004}"
+  iso_checksum      = "${var.iso_checksum_ubuntu}"
+  iso_urls          = "${var.iso_urls_ubuntu}"
   output_directory  = "${var.vm_name}"
   shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
   ssh_password      = "${var.ssh_password}"
@@ -84,18 +81,19 @@ source "vmware-iso" "ubuntu-2004" {
   usb               = "true"
   snapshot_name     = "Installed"
   vmx_data = {
-    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}"
+    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
   }
 }
 
 build {
-  sources = ["source.vmware-iso.ubuntu-2004"]
+  sources = ["source.vmware-iso.ubuntu"]
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
     scripts         = [
         "../scripts/setup.sh",
         "../scripts/disable_ipv6.sh",
+        "../scripts/gui.sh",
     ]
   }
 
@@ -103,8 +101,7 @@ build {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
         "../scripts/remnux-tools-sift.sh",
-        "../scripts/fix-sift.sh",
-        "../../scripts/user-setup.sh"
+        "../../scripts/user-setup.sh",
     ]
   }
   
