@@ -9,7 +9,7 @@ packer {
 
 variable "cpus" {
   type    = string
-  default = "2"
+  default = "4"
 }
 
 variable "disk_size" {

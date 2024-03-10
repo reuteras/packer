@@ -83,9 +83,9 @@ source "vmware-iso" "ubuntu-2004" {
   cpus              = "${var.cpus}"
   usb               = "true"
   snapshot_name     = "Installed"
-  vmx_data = {
-    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}"
-  }
+  vmx_data          = {
+                        "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+                    }
 }
 
 build {
@@ -94,23 +94,23 @@ build {
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
     scripts         = [
-        "../scripts/setup.sh",
-        "../scripts/disable_ipv6.sh",
+                        "../scripts/setup.sh",
+                        "../scripts/disable_ipv6.sh",
     ]
   }
 
   provisioner "shell" {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
-        "../scripts/act-clean-ubuntu_2004.sh",
-        "../../scripts/user-setup.sh"
+                        "../scripts/act-clean-ubuntu_2004.sh",
+                        "../../scripts/user-setup.sh"
     ]
   }
   
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
     scripts         = [
-        "../scripts/cleanup.sh"
+                        "../scripts/cleanup.sh"
     ]
   }
 }

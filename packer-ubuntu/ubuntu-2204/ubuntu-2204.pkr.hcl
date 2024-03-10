@@ -18,12 +18,12 @@ variable "hostname" {
   default = "ubuntu"
 }
 
-variable "iso_checksum_ubuntu_2204" {
+variable "iso_checksum_ubuntu" {
   type    = string
   default = ""
 }
 
-variable "iso_urls_ubuntu_2204" {
+variable "iso_urls_ubuntu" {
   type    = list(string)
   default = []
 }
@@ -48,7 +48,7 @@ variable "vm_name" {
   default = "Ubuntu_22.04_64-bit"
 }
 
-source "vmware-iso" "ubuntu-2204" {
+source "vmware-iso" "ubuntu" {
   boot_wait         = "5s"
   boot_command      = [
                         "c<wait>",
@@ -67,8 +67,8 @@ source "vmware-iso" "ubuntu-2204" {
   disk_size         = "${var.disk_size}"
   guest_os_type     = "ubuntu-64"
   headless          = "${var.headless}"
-  iso_checksum      = "${var.iso_checksum_ubuntu_2204}"
-  iso_urls          = "${var.iso_urls_ubuntu_2204}"
+  iso_checksum      = "${var.iso_checksum_ubuntu}"
+  iso_urls          = "${var.iso_urls_ubuntu}"
   output_directory  = "${var.vm_name}"
   shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
   ssh_password      = "${var.ssh_password}"
@@ -86,7 +86,7 @@ source "vmware-iso" "ubuntu-2204" {
 }
 
 build {
-  sources = ["source.vmware-iso.ubuntu-2204"]
+  sources = ["source.vmware-iso.ubuntu"]
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
