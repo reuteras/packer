@@ -9,8 +9,8 @@ variable "disk_size" {
 }
 
 variable "headless" {
-  type    = bool
-  default = false
+  type    = string
+  default = "true"
 }
 
 variable "hostname" {

@@ -58,7 +58,7 @@ source "vmware-iso" "ubuntu" {
                         "<enter><wait>",
                         "boot",
                         "<enter>"                        
-  					]
+                    ]
   cd_files          = [
                         "./http/meta-data",
                         "./http/user-data"
