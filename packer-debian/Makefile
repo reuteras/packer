@@ -4,6 +4,9 @@ all: debian
 build-debian-arm:
 	cd debian-arm && packer build -force -var-file ../variables-debian-arm.pkr.hcl debian-arm.pkr.hcl
 
+build-malcolm-arm:
+	cd malcolm-arm && packer build -force -var-file ../variables-debian-arm.pkr.hcl malcolm-arm.pkr.hcl
+
 cuckoo:
 	make validate-cuckoo
 	packer build -var-file=debian-vars.jsondebian-cuckoo.json
