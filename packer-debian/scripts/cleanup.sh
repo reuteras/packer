@@ -13,7 +13,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq autoremove
 sudo apt-get autoclean
 sudo apt-get clean
 
-if [[ $(df / | grep "/" | awk '{print $4}') -ge $((60*1024*1024)) ]]; then
+if [[ $(df / | grep "/" | awk '{print $4}') -ge $((50*1024*1024)) ]]; then
     echo "Disk larger then limit - not zeroing disk."
 else
     echo "Start zero of disk"
