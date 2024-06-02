@@ -146,7 +146,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "{{ .Vars }} -E bash '{{ .Path }}'"
+    execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
         "../scripts/user-setup.sh"
     ]
