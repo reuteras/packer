@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-# Install git
+# Install sudo
 DEBIAN_FRONTEND=noninteractive apt-get -y update
 DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
 DEBIAN_FRONTEND=noninteractive apt-get -y install sudo
