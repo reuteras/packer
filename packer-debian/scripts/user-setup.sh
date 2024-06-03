@@ -83,6 +83,10 @@ sudo apt install -y -qq \
 
 install-google-chrome
 
+info-message "Remove items from the Dash."
+DASH=$(gsettings get org.gnome.shell favorite-apps | sed -e "s/'org.gnome.Evolution.desktop', //" | sed -e "s/'rhythmbox.desktop', //" | sed -e "s/'libreoffice-writer.desktop', //" | sed -e "s/'yelp.desktop', //" | sed -e "s/'org.gnome.Software.desktop', //")
+gsettings set org.gnome.shell favorite-apps "$DASH"
+
 info-message "Configure dark mode."
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
