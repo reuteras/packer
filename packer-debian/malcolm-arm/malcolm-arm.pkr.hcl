@@ -54,7 +54,7 @@ variable "ssh_username" {
 
 variable "vm_name" {
   type    = string
-  default = "Debian_64-bit"
+  default = "Malcolm_Debian_64-bit"
 }
 
 source "vmware-iso" "debian" {
