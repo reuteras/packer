@@ -1,6 +1,6 @@
 variable "cpus" {
   type    = string
-  default = "2"
+  default = "4"
 }
 
 variable "disk_size" {
@@ -50,29 +50,17 @@ variable "vm_name" {
 
 source "vmware-iso" "kali" {
   boot_command     = [
-    "<esc><wait>", 
-    "setparams 'Install'<wait><enter>",
-    "/install.amd/vmlinuz<wait>",
-    " auto<wait>",
-    " console-setup/ask_detect=false<wait>",
-    " console-setup/layoutcode=sv<wait>",
-    " console-setup/modelcode=pc105<wait>",
-    " debconf/frontend=noninteractive<wait>",
-    " debian-installer=en_US<wait>", " fb=false<wait>",
-    " initrd=/install.amd/initrd.gz<wait>",
-    " kbd-chooser/method=sv<wait>",
-    " netcfg/choose_interface=eth0<wait>",
-    " console-keymaps-at/keymap=sv<wait>",
-    " keyboard-configuration/xkb-keymap=sv<wait>",
-    " keyboard-configuration/layout=Sweden<wait>",
-    " locale=en_US<wait>",
-    " netcfg/get_domain=vm<wait>",
-    " netcfg/get_hostname=kali<wait>",
-    " grub-installer/bootdev=/dev/sda<wait>",
-    " noapic<wait>",
-    " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg auto=true priority=critical",
-    " -- <wait>",
-    "<enter><wait>"
+    "<esc><wait>",
+    "install <wait>",
+    "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed_vmware.cfg ",
+    "locale=en_US ",
+    "keymap=us ",
+    "kbd-chooser/method=sv<wait> ",
+    "keyboard-configuration/xkb-keymap=sv<wait> ",
+    "keyboard-configuration/layout=Sweden<wait> ",
+    "hostname=kali ",
+    "domain='' ",
+    "<enter>"
   ]
   boot_wait         = "10s"
   disk_size         = "${var.disk_size}"
