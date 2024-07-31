@@ -51,6 +51,7 @@ variable "vm_name" {
 source "vmware-iso" "kali" {
   boot_command     = [
     "<esc><wait>", 
+    "setparams 'Install'<wait><enter>",
     "/install.amd/vmlinuz<wait>",
     " auto<wait>",
     " console-setup/ask_detect=false<wait>",
@@ -64,7 +65,6 @@ source "vmware-iso" "kali" {
     " console-keymaps-at/keymap=sv<wait>",
     " keyboard-configuration/xkb-keymap=sv<wait>",
     " keyboard-configuration/layout=Sweden<wait>",
-    " keyboard-configuration/variant=Sweden<wait>",
     " locale=en_US<wait>",
     " netcfg/get_domain=vm<wait>",
     " netcfg/get_hostname=kali<wait>",
