@@ -27,6 +27,9 @@ build-ubuntu-2004-arm:
 build-ubuntu-2204-arm:
 	cd ubuntu-2204-arm && packer build -force -var-file ../variables-ubuntu-2204-arm.pkr.hcl ubuntu-2204-arm.pkr.hcl
 
+build-ubuntu-2404-arm:
+	cd ubuntu-2404-arm && packer build -force -var-file ../variables-ubuntu-2404-arm.pkr.hcl ubuntu-2404-arm.pkr.hcl
+
 install:
 	../bin/install.sh
 
