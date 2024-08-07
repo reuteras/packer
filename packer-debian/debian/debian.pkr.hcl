@@ -5,7 +5,7 @@ variable "cpus" {
 
 variable "disk_size" {
   type    = string
-  default = "51200"
+  default = "512000"
 }
 
 variable "headless" {
@@ -57,13 +57,13 @@ source "vmware-iso" "debian" {
 	" debian-installer=en_US",
 	" locale=en_US",
 	" keymap=se",
-	" netcfg/get_hostname=cuckoo",
+	" netcfg/get_hostname=debian",
 	" netcfg/get_domain=local",
 	"<enter>"
   ]
   boot_wait         = "10s"
   disk_size         = "${var.disk_size}"
-  guest_os_type     = "debian10-64"
+  guest_os_type     = "debian12-64"
   headless          = "${var.headless}"
   http_directory    = "../debian/http"
   iso_checksum      = "${var.iso_checksum_debian}"
