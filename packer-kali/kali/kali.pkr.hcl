@@ -1,6 +1,6 @@
 variable "cpus" {
   type    = string
-  default = "4"
+  default = "2"
 }
 
 variable "disk_size" {
@@ -9,8 +9,8 @@ variable "disk_size" {
 }
 
 variable "headless" {
-  type    = bool
-  default = false
+  type    = string
+  default = "false"
 }
 
 variable "hostname" {
@@ -50,21 +50,17 @@ variable "vm_name" {
 
 source "vmware-iso" "kali" {
   boot_command     = [
-    "<esc><wait>",
-    "install <wait>",
-    "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed_vmware.cfg ",
-    "locale=en_US ",
-    "keymap=us ",
-    "kbd-chooser/method=sv<wait> ",
-    "keyboard-configuration/xkb-keymap=sv<wait> ",
-    "keyboard-configuration/layout=Sweden<wait> ",
-    "hostname=kali ",
-    "domain='' ",
-    "<enter>"
+    "<esc><wait>", 
+    "/install.amd/vmlinuz<wait>",
+    " grub-installer/bootdev=/dev/sda<wait>",
+    " initrd=/install.amd/initrd.gz<wait>",
+    " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg auto=true priority=critical",
+    " -- <wait>",
+    "<enter><wait>"
   ]
   boot_wait         = "10s"
   disk_size         = "${var.disk_size}"
-  guest_os_type     = "debian10-64"
+  guest_os_type     = "debian12-64"
   headless          = "${var.headless}"
   http_directory    = "../http"
   iso_checksum      = "${var.iso_checksum_kali}"
