@@ -146,7 +146,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "{{ .Vars }} bash '{{ .Path }}'"
+    execute_command = "echo '${var.ssh_password}' | {{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
         "../scripts/user-setup.sh",
         "../../scripts/user-setup.sh"
