@@ -149,7 +149,8 @@ build {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
         "../scripts/malcolm.sh",
-        "../scripts/user-setup.sh"
+        "../scripts/user-setup.sh",
+        "../../scripts/user-setup.sh"
     ]
   }
 
