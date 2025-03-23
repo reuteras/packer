@@ -4,5 +4,5 @@
 headless          = "true"
 ssh_username      = "kali"
 ssh_password      = "password"
-iso_checksum_kali = "beca4f8fd7f58eda290812f538e1323d3ba1f1a34df4b203e85de4be42525bb6"
-iso_urls_kali     = ["https://kali.download/base-images/kali-2024.4/kali-linux-2024.4-installer-amd64.iso"]
+iso_checksum_kali = "5c3e195d8e8c5857d75e5c82df861852de0063c54f9cd9f9cba6e29be53367fb"
+iso_urls_kali     = ["https://kali.download/base-images/kali-2025.1a/kali-linux-2025.1a-installer-amd64.iso"]
