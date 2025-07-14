@@ -1,6 +1,6 @@
 variable "cpus" {
   type    = string
-  default = "2"
+  default = "4"
 }
 
 variable "disk_size" {
@@ -30,7 +30,7 @@ variable "iso_urls_debian" {
 
 variable "memory" {
   type    = string
-  default = "4096"
+  default = "16384"
 }
 
 variable "ssh_password" {
