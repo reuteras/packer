@@ -5,10 +5,10 @@
 [[ ! -d ~/src ]] && mkdir ~/src
 
 if [[ -e ~/.zshrc ]]; then
-    if ! grep 'PATH' ~/.zshrc | grep '~/bin' > /dev/null ; then
-        echo '' >> .zshrc
-        echo 'export PATH=$PATH:~/bin' >> .zshrc
-    fi
+	if ! grep 'PATH' ~/.zshrc | grep '~/bin' >/dev/null; then
+		echo '' >>~/.zshrc
+		echo 'export PATH=$PATH:~/bin' >>~/.zshrc
+	fi
 fi
 
 git clone https://github.com/reuteras/vmbin.git ~/src/vmbin

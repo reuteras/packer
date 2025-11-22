@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "x${HOSTNAME}" == "x" ]]; then
+if [[ "${HOSTNAME}" == "" ]]; then
     NAME=centos
 else
     NAME="${HOSTNAME}"

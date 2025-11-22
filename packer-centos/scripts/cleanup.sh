@@ -1,8 +1,8 @@
 #!/bin/bash -eux
 
 package-cleanup --quiet --leaves | xargs yum remove -y
-(( $(rpm -E %{rhel}) >= 8 )) && dnf remove $(dnf repoquery --installonly --latest-limit=-2 -q)
-(( $(rpm -E %{rhel}) <= 7 )) && package-cleanup --oldkernels --count=2
+(( $(rpm -E '%{rhel}') >= 8 )) && dnf remove $(dnf repoquery --installonly --latest-limit=-2 -q)
+(( $(rpm -E '%{rhel}') <= 7 )) && package-cleanup --oldkernels --count=2
 
 yum remove -y yum-utils
 yum clean all
