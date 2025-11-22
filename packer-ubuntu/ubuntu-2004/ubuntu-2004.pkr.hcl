@@ -106,7 +106,7 @@ build {
                         "../../scripts/user-setup.sh"
     ]
   }
-  
+
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
     scripts         = [

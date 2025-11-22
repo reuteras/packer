@@ -8,7 +8,7 @@ yum remove -y yum-utils
 yum clean all
 rm -rf /var/cache/yum
 rm -rf /var/tmp/yum-*
-rm -rf /home/*/.cache/*/* /root/.cache/*/* 
+rm -rf /home/*/.cache/*/* /root/.cache/*/*
 
 
 # Zero out the rest of the free space using dd, then delete the written file.
