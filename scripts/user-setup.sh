@@ -5,9 +5,9 @@
 [[ ! -d ~/src ]] && mkdir ~/src
 
 if [[ -e ~/.zshrc ]]; then
-	if ! grep 'PATH' ~/.zshrc | grep '~/bin' >/dev/null; then
+	if ! grep 'PATH' ~/.zshrc | grep "$HOME/bin" >/dev/null; then
 		echo '' >>~/.zshrc
-		echo 'export PATH=$PATH:~/bin' >>~/.zshrc
+		echo "export PATH=\$PATH:$HOME/bin" >>~/.zshrc
 	fi
 fi
 

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ "${HOSTNAME}" == "" ]]; then
-    NAME=centos
+	NAME=centos
 else
-    NAME="${HOSTNAME}"
+	NAME="${HOSTNAME}"
 fi
 
 hostnamectl set-hostname "${NAME}"
