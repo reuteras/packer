@@ -78,7 +78,7 @@ source "vmware-iso" "debian" {
   disk_size         = "${var.disk_size}"
   guest_os_type     = "arm-debian12-64"
   headless          = "${var.headless}"
-  http_directory    = "../debian/http"
+  http_directory    = "http"
   iso_checksum      = "${var.iso_checksum_debian}"
   iso_urls          = "${var.iso_urls_debian}"
   output_directory  = "${var.vm_name}"
