@@ -5,7 +5,7 @@ variable "cpus" {
 
 variable "disk_size" {
   type    = string
-  default = "51200"
+  default = "102400"
 }
 
 variable "headless" {
@@ -30,7 +30,7 @@ variable "iso_urls_kali" {
 
 variable "memory" {
   type    = string
-  default = "4096"
+  default = "8192"
 }
 
 variable "ssh_password" {
