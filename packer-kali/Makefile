@@ -7,17 +7,6 @@ kali:
 build-kali-arm:
 	cd kali-arm && packer build -force -var-file ../variables-kali-arm.pkr.hcl kali-arm.pkr.hcl 
 
-kali-full:
-	make validate-kali
-	packer build kali.json
-
-debug-kali:
-	make validate-kali
-	packer build -on-error=abort kali.json
-
-validate-kali:
-	packer validate kali.json
-
 install:
 	../bin/install.sh
 
