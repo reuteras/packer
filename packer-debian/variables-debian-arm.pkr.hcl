@@ -6,5 +6,5 @@ ssh_username  = "user"
 ssh_password  = "password"
 
 // Debian Bookworm
-iso_checksum_debian = "sha256:9ecd75a62d90ecedfc3f7fcdf46c349bb4ebfb79553514c9d96239cd9bada820"
-iso_urls_debian     = ["https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/debian-13.1.0-arm64-netinst.iso"]
+iso_checksum_debian = "sha256:f6df8813e4a02dec91248c7127d8150a747485d3ca7294644815ac3aeda30662"
+iso_urls_debian     = ["https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/debian-13.2.0-arm64-netinst.iso"]
