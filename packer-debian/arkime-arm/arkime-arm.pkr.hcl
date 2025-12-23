@@ -66,7 +66,7 @@ source "vmware-iso" "debian" {
     "country=SV ",
     "locale=en_US.UTF-8 ",
     "keymap=se ",
-    "file=/cdrom/preseed.cfg ",
+    "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
     "hostname=${var.hostname} ",
     "domain=localdomain ",
     "interface=auto ",
@@ -78,8 +78,7 @@ source "vmware-iso" "debian" {
   disk_size         = "${var.disk_size}"
   guest_os_type     = "arm-debian12-64"
   headless          = "${var.headless}"
-  cd_files          = ["http/preseed.cfg"]
-  cd_label          = "cidata"
+  http_directory    = "../http"
   iso_checksum      = "${var.iso_checksum_debian}"
   iso_urls          = "${var.iso_urls_debian}"
   output_directory  = "${var.vm_name}"
