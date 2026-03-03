@@ -1,7 +1,7 @@
 //  variables.pkr.hcl
 
 // Defaults for all Debian installations
-headless      = "true"
+headless      = false
 ssh_username  = "user"
 ssh_password  = "password"
 

@@ -1,16 +1,25 @@
+packer {
+  required_plugins {
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = "~> 1"
+    }
+  }
+}
+
 variable "cpus" {
   type    = string
-  default = "4"
+  default = "2"
 }
 
 variable "disk_size" {
   type    = string
-  default = "512000"
+  default = "102400"
 }
 
 variable "headless" {
-  type    = string
-  default = "true"
+  type    = bool
+  default = false
 }
 
 variable "hostname" {
@@ -30,7 +39,7 @@ variable "iso_urls_debian" {
 
 variable "memory" {
   type    = string
-  default = "16384"
+  default = "8192"
 }
 
 variable "ssh_password" {
@@ -51,22 +60,21 @@ variable "vm_name" {
 source "vmware-iso" "debian" {
   boot_command     = [
     "<esc><wait>",
-    "install",
-	" auto",
-	" file=/cdrom/preseed.cfg",
-	" debian-installer=en_US",
-	" locale=en_US",
-	" keymap=se",
-	" netcfg/get_hostname=debian",
-	" netcfg/get_domain=local",
-	"<enter>"
+    "install ",
+    "auto ",
+    "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+    "debian-installer=en_US ",
+    "locale=en_US ",
+    "keymap=se ",
+    "netcfg/get_hostname=debian ",
+    "netcfg/get_domain=local ",
+    "<enter>"
   ]
-  boot_wait         = "10s"
+  boot_wait         = "3s"
   disk_size         = "${var.disk_size}"
   guest_os_type     = "debian12-64"
   headless          = "${var.headless}"
-  cd_files          = ["../debian/http/preseed.cfg"]
-  cd_label          = "cidata"
+  http_directory    = "../http"
   iso_checksum      = "${var.iso_checksum_debian}"
   iso_urls          = "${var.iso_urls_debian}"
   output_directory  = "${var.vm_name}"
@@ -80,8 +88,44 @@ source "vmware-iso" "debian" {
   cpus              = "${var.cpus}"
   usb               = "true"
   snapshot_name     = "Installed"
+  disk_adapter_type = "nvme"
+  disk_type_id      = "0"
+  network           = "nat"
+  network_adapter_type = "vmxnet3"
+  sound             = "true"
+  version           = "19"
+  cdrom_adapter_type = "sata"
   vmx_data = {
-    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+    "annotation"                                = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+    "config.version"                            = "8"
+    "sound.autoDetect"                          = "TRUE"
+    "sound.virtualDev"                          = "hdaudio"
+    "sound.fileName"                            = "-1"
+    "tools.upgrade.policy"                      = "upgradeAtPowerCycle"
+    "usb_xhci:4.deviceType"                     = "hid"
+    "usb_xhci:4.parent"                         = "-1"
+    "usb_xhci:4.port"                           = "4"
+    "usb_xhci:4.present"                        = "TRUE"
+    "usb_xhci:6.deviceType"                     = "hub"
+    "usb_xhci:6.parent"                         = "-1"
+    "usb_xhci:6.port"                           = "6"
+    "usb_xhci:6.present"                        = "TRUE"
+    "usb_xhci:6.speed"                          = "2"
+    "usb_xhci:7.deviceType"                     = "hub"
+    "usb_xhci:7.parent"                         = "-1"
+    "usb_xhci:7.port"                           = "7"
+    "usb_xhci:7.present"                        = "TRUE"
+    "usb_xhci:7.speed"                          = "4"
+    "usb_xhci.pciSlotNumber"                    = "192"
+    "usb_xhci.present"                          = "TRUE"
+    "uefi.secureBoot.enabled"                   = "FALSE"
+  }
+  vmx_data_post = {
+    "sata0:0.autodetect"     = "TRUE"
+    "sata0:0.deviceType"     = "cdrom-raw"
+    "sata0:0.fileName"       = "auto detect"
+    "sata0:0.startConnected" = "FALSE"
+    "sata0:0.present"        = "TRUE"
   }
 }
 
@@ -97,7 +141,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "{{ .Vars }} bash '{{ .Path }}'"
+    execute_command = "echo '${var.ssh_password}' | {{ .Vars }} bash '{{ .Path }}'"
     scripts         = [
         "../scripts/user-setup.sh",
         "../../scripts/user-setup.sh"
