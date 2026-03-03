@@ -1,1 +1,0 @@
-./build-kali.ps1
