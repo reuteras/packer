@@ -62,6 +62,10 @@ variable "http_ip" {
   default = ""
 }
 
+locals {
+  http_addr = var.http_ip != "" ? var.http_ip : "{{ .HTTPIP }}"
+}
+
 source "vmware-iso" "debian" {
   boot_command     = [
     "<wait><wait><wait>c<wait><wait><wait>",
@@ -71,7 +75,7 @@ source "vmware-iso" "debian" {
     "country=SV ",
     "locale=en_US.UTF-8 ",
     "keymap=se ",
-    "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+    "url=http://${local.http_addr}:{{ .HTTPPort }}/preseed.cfg ",
     "hostname=${var.hostname} ",
     "domain=localdomain ",
     "interface=auto ",
