@@ -57,6 +57,11 @@ variable "vm_name" {
   default = "Debian_64-bit"
 }
 
+variable "http_ip" {
+  type    = string
+  default = ""
+}
+
 source "vmware-iso" "debian" {
   boot_command     = [
     "<wait><wait><wait>c<wait><wait><wait>",
@@ -79,6 +84,7 @@ source "vmware-iso" "debian" {
   guest_os_type     = "arm-debian12-64"
   headless          = "${var.headless}"
   http_directory    = "../http"
+  http_bind_address = var.http_ip
   iso_checksum      = "${var.iso_checksum_debian}"
   iso_urls          = "${var.iso_urls_debian}"
   output_directory  = "${var.vm_name}"
