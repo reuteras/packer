@@ -1,12 +1,9 @@
 CHECKPOINT_DISABLE ?= 1
-all: sift remnux ubuntu
+all: remnux ubuntu
 
 remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
 	packer build -on-error=abort ubuntu-remnux-tools-remnux.json
-
-sift:
-	cd sift && packer build -force -var-file ../variables-ubuntu-2204.pkr.hcl sift.pkr.hcl
 
 build-ubuntu-2404-arm-qemu:
 	cd ubuntu-2404-arm-qemu && packer init ubuntu-2404-arm-qemu.pkr.hcl && \
