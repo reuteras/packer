@@ -148,6 +148,14 @@ build {
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
+    inline = [
+      "ROOT_UUID=$(blkid -s UUID -o value $(findmnt -n -o SOURCE /))",
+      "sed -i \"s|root=/dev/vd[a-z][0-9]*|root=UUID=$${ROOT_UUID}|g\" /boot/grub/grub.cfg"
+    ]
+  }
+
+  provisioner "shell" {
+    execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
     scripts = [
       "../scripts/cleanup.sh"
     ]
