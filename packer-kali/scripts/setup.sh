@@ -16,4 +16,3 @@ apt -y install bc git open-vm-tools haveged
 # Fix for login issues related to lack of randomness
 # https://bugs.kali.org/view.php?id=4994
 systemctl enable haveged
-

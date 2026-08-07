@@ -7,4 +7,3 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y -qq install \
     zip
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -qq install open-vm-tools-desktop
-

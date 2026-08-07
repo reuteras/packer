@@ -89,7 +89,7 @@ source "qemu" "debian" {
   cdrom_interface = "scsi"
   format          = "qcow2"
 
-  net_device     = "virtio-net"
+  net_device = "virtio-net"
 
   http_directory = "../http"
 

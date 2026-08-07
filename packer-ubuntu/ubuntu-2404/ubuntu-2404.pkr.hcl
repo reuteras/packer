@@ -49,39 +49,39 @@ variable "vm_name" {
 }
 
 source "vmware-iso" "ubuntu" {
-  boot_wait         = "5s"
-  boot_command      = [
-                        "c<wait>",
-                        "linux /casper/vmlinuz --- autoinstall ds=nocloud;",
-                        "<enter><wait>",
-                        "initrd /casper/initrd",
-                        "<enter><wait>",
-                        "boot",
-                        "<enter>"
-                    ]
-  cd_files          = [
-                        "./http/meta-data",
-                        "./http/user-data"
-                    ]
-  cd_label          = "cidata"
-  disk_size         = "${var.disk_size}"
-  guest_os_type     = "ubuntu-64"
-  headless          = "${var.headless}"
-  iso_checksum      = "${var.iso_checksum_ubuntu}"
-  iso_urls          = "${var.iso_urls_ubuntu}"
-  output_directory  = "${var.vm_name}"
-  shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
-  ssh_password      = "${var.ssh_password}"
-  ssh_port          = 22
-  ssh_timeout       = "8000s"
-  ssh_username      = "${var.ssh_username}"
-  vm_name           = "${var.vm_name}"
-  memory            = "${var.memory}"
-  cpus              = "${var.cpus}"
-  usb               = "true"
-  snapshot_name     = "Installed"
+  boot_wait = "5s"
+  boot_command = [
+    "c<wait>",
+    "linux /casper/vmlinuz --- autoinstall ds=nocloud;",
+    "<enter><wait>",
+    "initrd /casper/initrd",
+    "<enter><wait>",
+    "boot",
+    "<enter>"
+  ]
+  cd_files = [
+    "./http/meta-data",
+    "./http/user-data"
+  ]
+  cd_label         = "cidata"
+  disk_size        = "${var.disk_size}"
+  guest_os_type    = "ubuntu-64"
+  headless         = "${var.headless}"
+  iso_checksum     = "${var.iso_checksum_ubuntu}"
+  iso_urls         = "${var.iso_urls_ubuntu}"
+  output_directory = "${var.vm_name}"
+  shutdown_command = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
+  ssh_password     = "${var.ssh_password}"
+  ssh_port         = 22
+  ssh_timeout      = "8000s"
+  ssh_username     = "${var.ssh_username}"
+  vm_name          = "${var.vm_name}"
+  memory           = "${var.memory}"
+  cpus             = "${var.cpus}"
+  usb              = "true"
+  snapshot_name    = "Installed"
   vmx_data = {
-    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+    "annotation" : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
   }
 }
 
@@ -90,25 +90,25 @@ build {
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
-    scripts         = [
-        "../scripts/setup.sh",
-        "../scripts/disable_ipv6.sh",
-        "../scripts/gui.sh"
+    scripts = [
+      "../scripts/setup.sh",
+      "../scripts/disable_ipv6.sh",
+      "../scripts/gui.sh"
     ]
   }
 
   provisioner "shell" {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
-    scripts         = [
-        "../scripts/act-clean-ubuntu_2404.sh",
-        "../../scripts/user-setup.sh"
+    scripts = [
+      "../scripts/act-clean-ubuntu_2404.sh",
+      "../../scripts/user-setup.sh"
     ]
   }
-  
+
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
-    scripts         = [
-        "../scripts/cleanup.sh"
+    scripts = [
+      "../scripts/cleanup.sh"
     ]
   }
 }

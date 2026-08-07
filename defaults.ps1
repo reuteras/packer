@@ -23,12 +23,12 @@ function Create-VirtualMachine($BASE, $CONF_NAME, $VM_DIR_NAME){
         Write-Host "Directory for VM exists. Remove it and rerun the script. Exiting." -ForegroundColor Red
         Exit
     }
-    
+
     Set-Location $CONF_NAME
-    
+
     packer build -force -var-file ../variables-$BASE.pkr.hcl ./$CONF_NAME.pkr.hcl
     Start-Sleep -s 2
-    
+
     if (-not (Test-Path $VM_DIR/$VM_DIR_NAME)){
         Move-Item ./$VM_DIR_NAME $VM_DIR
         Start-Sleep -s 2
@@ -36,11 +36,11 @@ function Create-VirtualMachine($BASE, $CONF_NAME, $VM_DIR_NAME){
         Write-Host "Directory for VM has been created already during packer run. Exiting." -ForegroundColor Red
         Exit
     }
-    
+
     if (Test-Path ./shared.ps1) {
         ./shared.ps1
     }
-    
+
     Set-Location ..
     vmware.exe -q -t $VM_DIR/$VM_DIR_NAME/$VM_DIR_NAME.vmx
     Start-Sleep -s 2
@@ -61,7 +61,7 @@ function Add-SharedFolder($VM_DIR_NAME, $SHARE_NAME, $SHARE_PATH, $SHARED_STATE)
 function Start-VM($VM_DIR_NAME){
     vmrun.exe start $VM_DIR/$VM_DIR_NAME/$VM_DIR_NAME.vmx nogui
     Start-Sleep -s 2
-    
+
     # Wait until running
     vmrun.exe getGuestIPAddress $VM_DIR/$VM_DIR_NAME/$VM_DIR_NAME.vmx
     Start-Sleep -s 2

@@ -2,7 +2,7 @@ packer {
   required_plugins {
     vmware = {
       version = "~> 1"
-      source = "github.com/hashicorp/vmware"
+      source  = "github.com/hashicorp/vmware"
     }
   }
 }
@@ -58,7 +58,7 @@ variable "vm_name" {
 }
 
 source "vmware-iso" "ubuntu-2004" {
-  boot_command     = [
+  boot_command = [
     "<tab>",
     " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
     " auto=true",
@@ -74,26 +74,26 @@ source "vmware-iso" "ubuntu-2004" {
     " keyboard-configuration/variant=Sweden",
     "<enter><wait>"
   ]
-  boot_wait         = "10s"
-  disk_size         = "${var.disk_size}"
-  guest_os_type     = "ubuntu-64"
-  headless          = "${var.headless}"
-  http_directory    = "../http"
-  iso_checksum      = "${var.iso_checksum_ubuntu_2004}"
-  iso_urls          = "${var.iso_urls_ubuntu_2004}"
-  output_directory  = "${var.vm_name}"
-  shutdown_command  = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
-  ssh_password      = "${var.ssh_password}"
-  ssh_port          = 22
-  ssh_timeout       = "8000s"
-  ssh_username      = "${var.ssh_username}"
-  vm_name           = "${var.vm_name}"
-  memory            = "${var.memory}"
-  cpus              = "${var.cpus}"
-  usb               = "true"
-  snapshot_name     = "Installed"
+  boot_wait        = "10s"
+  disk_size        = "${var.disk_size}"
+  guest_os_type    = "ubuntu-64"
+  headless         = "${var.headless}"
+  http_directory   = "../http"
+  iso_checksum     = "${var.iso_checksum_ubuntu_2004}"
+  iso_urls         = "${var.iso_urls_ubuntu_2004}"
+  output_directory = "${var.vm_name}"
+  shutdown_command = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
+  ssh_password     = "${var.ssh_password}"
+  ssh_port         = 22
+  ssh_timeout      = "8000s"
+  ssh_username     = "${var.ssh_username}"
+  vm_name          = "${var.vm_name}"
+  memory           = "${var.memory}"
+  cpus             = "${var.cpus}"
+  usb              = "true"
+  snapshot_name    = "Installed"
   vmx_data = {
-    "annotation"    : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
+    "annotation" : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
   }
 }
 
@@ -102,25 +102,25 @@ build {
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
-    scripts         = [
-        "../scripts/setup.sh",
-        "../scripts/disable_ipv6.sh",
+    scripts = [
+      "../scripts/setup.sh",
+      "../scripts/disable_ipv6.sh",
     ]
   }
 
   provisioner "shell" {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
-    scripts         = [
-        "../scripts/remnux-tools-remnux.sh",
-        "../scripts/fix-remnux.sh",
-        "../../scripts/user-setup.sh"
+    scripts = [
+      "../scripts/remnux-tools-remnux.sh",
+      "../scripts/fix-remnux.sh",
+      "../../scripts/user-setup.sh"
     ]
   }
-  
+
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'"
-    scripts         = [
-        "../scripts/cleanup.sh"
+    scripts = [
+      "../scripts/cleanup.sh"
     ]
   }
 }
