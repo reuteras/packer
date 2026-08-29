@@ -61,13 +61,6 @@ If you have problems building with Packer with VMware Workstation 16 read the bl
 - Click Change Settings
 - Don’t change anything, just click OK
 
-## TODO
-
-Update the code and fix (among other things):
-
-- Better preseed.cfg can cloud-init files
-- Use templates
-
 ## Bugs
 
 There will be bugs so please file a report when you find them.
