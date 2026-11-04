@@ -1,11 +1,6 @@
 *.iso
 *.vmwarevm
 *.ova
-arkime/Arkime*
 packer_cache
-remnux/REMnux*
-sift/SIFT*
-ubuntu-2204-arm/Ubuntu*
-ubuntu-2004-arm/Ubuntu*
 remnux-arm-qemu/REMnux_arm64/
 ubuntu-2404-arm-qemu/Ubuntu_24.04_64-bit_arm/

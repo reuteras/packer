@@ -1,9 +1,5 @@
 CHECKPOINT_DISABLE ?= 1
-all: remnux ubuntu
-
-remnux:
-	packer validate ubuntu-remnux-tools-remnux.json
-	packer build -on-error=abort ubuntu-remnux-tools-remnux.json
+all: build-ubuntu-2404-arm-qemu
 
 # arm64 builds use QEMU (hvf) and are converted to VMware Fusion VMs.
 build-ubuntu-2404-arm-qemu:
@@ -20,6 +16,9 @@ build-remnux-arm-qemu:
 
 install:
 	../bin/install.sh
+
+clean:
+	rm -rf ubuntu-2404-arm-qemu/Ubuntu_24.04_64-bit_arm remnux-arm-qemu/REMnux_arm64
 
 dist-clean:
 	make clean

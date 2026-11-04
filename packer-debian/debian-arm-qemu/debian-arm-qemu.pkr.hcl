@@ -58,7 +58,7 @@ variable "vm_name" {
 }
 
 source "qemu" "debian" {
-  qemu_binary  = "../scripts/qemu-arm64-wrapper.sh"
+  qemu_binary  = "../../scripts/qemu-arm64-wrapper.sh"
   machine_type = "virt"
   cpu_model    = "host"
   accelerator  = "hvf"
@@ -133,7 +133,7 @@ build {
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} bash '{{ .Path }}'"
     scripts = [
-      "../scripts/user-setup.sh",
+      "../scripts/setup-debian-desktop.sh",
       "../../scripts/user-setup.sh"
     ]
   }
