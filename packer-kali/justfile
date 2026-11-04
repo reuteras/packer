@@ -2,10 +2,8 @@ export CHECKPOINT_DISABLE := env("CHECKPOINT_DISABLE", "1")
 
 default: build-kali-arm-qemu
 
+[working-directory('kali-arm-qemu')]
 build-kali-arm-qemu:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    cd kali-arm-qemu
     packer init kali-arm-qemu.pkr.hcl
     packer build -force -var-file ../variables-kali-arm.pkr.hcl kali-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh Kali_64-bit_arm Kali_64-bit_arm 8192 2 arm-debian13-64
