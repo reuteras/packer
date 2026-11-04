@@ -7,24 +7,24 @@ This repo contains scripts and configuration to build virtual machines on macOS 
 The arm64 VMs are built with QEMU (hvf) and converted to VMware Fusion VMs. Install the dependencies with Homebrew:
 
 ```bash
-brew install packer qemu
+brew install just packer qemu
 ```
 
 Then build and install a VM from its folder, for example REMnux:
 
 ```bash
 cd packer-ubuntu
-make build-remnux-arm-qemu
-make install
+just build-remnux-arm-qemu
+just install
 ```
 
-Available targets:
+Available recipes (run `just --list` in a folder to see them):
 
 - packer-debian: `build-debian-arm-qemu`, `build-arkime-arm-qemu`, `build-malcolm-arm-qemu`
 - packer-kali: `build-kali-arm-qemu`
 - packer-ubuntu: `build-ubuntu-2404-arm-qemu`, `build-remnux-arm-qemu`
 
-Each build ends with `scripts/qcow2-to-fusion.sh`, which converts the disk to VMDK, writes a `.vmx` and takes an `Installed` snapshot. `make install` moves the VM to `~/Virtual Machines.localized` and opens it in Fusion.
+Each build ends with `scripts/qcow2-to-fusion.sh`, which converts the disk to VMDK, writes a `.vmx` and takes an `Installed` snapshot. `just install` moves the VM to `~/Virtual Machines.localized` and opens it in Fusion.
 
 ## Instructions on Windows
 
