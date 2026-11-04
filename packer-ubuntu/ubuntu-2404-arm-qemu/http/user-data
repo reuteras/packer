@@ -33,3 +33,16 @@ autoinstall:
   - 'echo "malware ALL=(ALL) NOPASSWD:ALL" > /target/etc/sudoers.d/ubuntu-nopw'
   - chmod 440 /target/etc/sudoers.d/ubuntu-nopw
   - curtin in-target --target=/target -- sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/' /etc/default/grub
+  # Match any en* NIC so networking works both under QEMU (virtio) and in VMware Fusion (vmxnet3).
+  - rm -f /target/etc/netplan/*.yaml
+  - |
+    cat > /target/etc/netplan/01-all-en.yaml << 'EOF'
+    network:
+      version: 2
+      ethernets:
+        all-en:
+          match:
+            name: "en*"
+          dhcp4: true
+    EOF
+  - chmod 600 /target/etc/netplan/01-all-en.yaml
