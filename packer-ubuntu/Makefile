@@ -5,16 +5,18 @@ remnux:
 	packer validate ubuntu-remnux-tools-remnux.json
 	packer build -on-error=abort ubuntu-remnux-tools-remnux.json
 
+# arm64 builds use QEMU (hvf) and are converted to VMware Fusion VMs.
 build-ubuntu-2404-arm-qemu:
 	cd ubuntu-2404-arm-qemu && packer init ubuntu-2404-arm-qemu.pkr.hcl && \
 	    packer build -force \
-	    -var-file ../variables-ubuntu-2404-arm.pkr.hcl ubuntu-2404-arm-qemu.pkr.hcl; \
-	RC=$$?; \
-	if [ $$RC -eq 0 ]; then \
-	    qemu-img convert -f qcow2 -O vmdk \
-	        Ubuntu_24.04_64-bit_arm/Ubuntu_24.04_64-bit_arm.qcow2 \
-	        Ubuntu_24.04_64-bit_arm/Ubuntu_24.04_64-bit_arm.vmdk; \
-	fi; exit $$RC
+	    -var-file ../variables-ubuntu-2404-arm.pkr.hcl ubuntu-2404-arm-qemu.pkr.hcl && \
+	    ../scripts/qcow2-to-fusion.sh Ubuntu_24.04_64-bit_arm Ubuntu_24.04_64-bit_arm 8192 2
+
+build-remnux-arm-qemu:
+	cd remnux-arm-qemu && packer init remnux-arm-qemu.pkr.hcl && \
+	    packer build -force \
+	    -var-file ../variables-ubuntu-2404-arm.pkr.hcl remnux-arm-qemu.pkr.hcl && \
+	    ../scripts/qcow2-to-fusion.sh REMnux_arm64 REMnux_arm64 8192 4
 
 install:
 	../bin/install.sh

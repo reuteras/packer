@@ -4,5 +4,5 @@
 headless                     = "true"
 ssh_username                 = "malware"
 ssh_password                 = "password"
-iso_checksum_ubuntu_2404_arm = "2ee2163c9b901ff5926400e80759088ff3b879982a3956c02100495b489fd555"
-iso_urls_ubuntu_2404_arm     = ["https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04.3-live-server-arm64.iso"]
+iso_checksum_ubuntu_2404_arm = "f12484464c7d4d73e2167e0a7dbda1e669f8fae9bcf778dc0944937034b320cb"
+iso_urls_ubuntu_2404_arm     = ["https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04.5-live-server-arm64.iso"]
