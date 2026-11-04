@@ -58,7 +58,7 @@ variable "vm_name" {
 }
 
 source "qemu" "debian" {
-  qemu_binary  = "../scripts/qemu-arm64-wrapper.sh"
+  qemu_binary  = "../../scripts/qemu-arm64-wrapper.sh"
   machine_type = "virt"
   cpu_model    = "host"
   accelerator  = "hvf"
@@ -134,7 +134,8 @@ build {
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     scripts = [
       "../scripts/arkime.sh",
-      "../scripts/user-setup.sh"
+      "../scripts/setup-debian-desktop.sh",
+      "../../scripts/user-setup.sh"
     ]
   }
 

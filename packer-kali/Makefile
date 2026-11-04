@@ -1,8 +1,5 @@
 CHECKPOINT_DISABLE ?= 1
-all: kali-full
-
-kali:
-	packer build kali.json
+all: build-kali-arm-qemu
 
 build-kali-arm-qemu:
 	cd kali-arm-qemu && packer init kali-arm-qemu.pkr.hcl && \
@@ -14,7 +11,7 @@ install:
 	../bin/install.sh
 
 clean:
-	rm -rf Kali_64-bit.vmwarevm
+	rm -rf kali-arm-qemu/Kali_64-bit_arm
 
 dist-clean:
 	make clean

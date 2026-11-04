@@ -58,7 +58,7 @@ variable "vm_name" {
 }
 
 source "qemu" "ubuntu-2404" {
-  qemu_binary  = "../scripts/qemu-arm64-wrapper.sh"
+  qemu_binary  = "../../scripts/qemu-arm64-wrapper.sh"
   machine_type = "virt"
   cpu_model    = "host"
   accelerator  = "hvf"

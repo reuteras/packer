@@ -54,7 +54,6 @@ sudo apt -qq update > /dev/null 2>&1
 info-message "Install packages."
 sudo apt install -y -qq \
     ascii \
-    bless \
     bsdgames \
     dos2unix \
     exfat-fuse \

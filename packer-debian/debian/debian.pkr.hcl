@@ -143,7 +143,7 @@ build {
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{ .Vars }} bash '{{ .Path }}'"
     scripts = [
-      "../scripts/user-setup.sh",
+      "../scripts/setup-debian-desktop.sh",
       "../../scripts/user-setup.sh"
     ]
   }

@@ -1,6 +1,30 @@
 # Packer
 
-This repo contains scripts and configuration to build virtual machines on macOS and Windows with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested. Since VMware Fusion for arm is in beta no real effort is made to support that platform.
+This repo contains scripts and configuration to build virtual machines on macOS and Windows with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested.
+
+## Instructions on macOS (Apple Silicon)
+
+The arm64 VMs are built with QEMU (hvf) and converted to VMware Fusion VMs. Install the dependencies with Homebrew:
+
+```bash
+brew install packer qemu
+```
+
+Then build and install a VM from its folder, for example REMnux:
+
+```bash
+cd packer-ubuntu
+make build-remnux-arm-qemu
+make install
+```
+
+Available targets:
+
+- packer-debian: `build-debian-arm-qemu`, `build-arkime-arm-qemu`, `build-malcolm-arm-qemu`
+- packer-kali: `build-kali-arm-qemu`
+- packer-ubuntu: `build-ubuntu-2404-arm-qemu`, `build-remnux-arm-qemu`
+
+Each build ends with `scripts/qcow2-to-fusion.sh`, which converts the disk to VMDK, writes a `.vmx` and takes an `Installed` snapshot. `make install` moves the VM to `~/Virtual Machines.localized` and opens it in Fusion.
 
 ## Instructions on Windows
 
