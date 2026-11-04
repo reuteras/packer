@@ -22,7 +22,7 @@ Available recipes (run `just --list` in a folder to see them):
 
 - packer-debian: `build-debian-arm-qemu`, `build-arkime-arm-qemu`, `build-malcolm-arm-qemu`
 - packer-kali: `build-kali-arm-qemu`
-- packer-ubuntu: `build-ubuntu-2404-arm-qemu`, `build-remnux-arm-qemu`
+- packer-ubuntu: `build-ubuntu-2404-arm-qemu`, `build-remnux-arm-qemu`, `build-sift-arm-qemu`
 
 Each build ends with `scripts/qcow2-to-fusion.sh`, which converts the disk to VMDK, writes a `.vmx` and takes an `Installed` snapshot. `just install` moves the VM to `~/Virtual Machines.localized` and opens it in Fusion.
 

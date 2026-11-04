@@ -3,4 +3,5 @@
 *.ova
 packer_cache
 remnux-arm-qemu/REMnux_arm64/
+sift-arm-qemu/SIFT_arm64/
 ubuntu-2404-arm-qemu/Ubuntu_24.04_64-bit_arm/
