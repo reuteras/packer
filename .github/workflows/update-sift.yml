@@ -1,0 +1,56 @@
+---
+name: Update SIFT
+
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Update pinned SIFT and cast versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bin/update-sift.sh | tee "$RUNNER_TEMP/summary.md"
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet; then
+            echo "SIFT and cast are up to date."
+            exit 0
+          fi
+          file=packer-ubuntu/scripts/sift.sh
+          sift=$(sed -n 's/^SIFT_VERSION="\(.*\)"$/\1/p' "$file")
+          cast=$(sed -n 's/^CAST_VERSION="\(.*\)"$/\1/p' "$file")
+          branch="update-sift/sift-${sift}-cast-${cast}"
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$remote" "$branch" >/dev/null; then
+            echo "Branch $branch already exists; skipping."
+            exit 0
+          fi
+          title="Update SIFT ${sift} / cast ${cast}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898599+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -am "$title"
+          git push "$remote" "HEAD:refs/heads/$branch"
+          {
+            cat "$RUNNER_TEMP/summary.md"
+            echo
+            echo "Review the changelogs before merging, then run \`just build-sift-arm-qemu\`."
+          } >"$RUNNER_TEMP/body.md"
+          gh pr create --base main --head "$branch" --title "$title" --body-file "$RUNNER_TEMP/body.md"
