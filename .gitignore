@@ -1,1 +1,7 @@
 packer_cache
+
+# VM build output
+*_64-bit/
+*_64-bit_arm/
+*_arm64/
+packer-kali/kali/Kali/
