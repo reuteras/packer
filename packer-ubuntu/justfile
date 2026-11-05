@@ -1,3 +1,5 @@
+set windows-shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
+
 export CHECKPOINT_DISABLE := env("CHECKPOINT_DISABLE", "1")
 
 # Build the default VM (Ubuntu 24.04 arm64)
@@ -24,14 +26,31 @@ build-sift-arm-qemu:
     packer build -force -var-file ../variables-ubuntu-2404-arm.pkr.hcl sift-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh SIFT_arm64 SIFT_arm64 8192 4 arm-ubuntu-64
 
-# Move built VMs to the Fusion VM folder and open them
+# Move built VMs to the Fusion VM folder and open them (macOS only; Windows builds install themselves)
+[macos]
 install:
     ../bin/install.sh
 
 # Remove build output
+[unix]
 clean:
     rm -rf ubuntu-2404-arm-qemu/Ubuntu_24.04_64-bit_arm remnux-arm-qemu/REMnux_arm64 sift-arm-qemu/SIFT_arm64
 
 # Remove build output and the packer ISO cache
+[unix]
 dist-clean: clean
     rm -rf packer_cache
+
+# Build Ubuntu 24.04 amd64 VM for VMware Workstation (Windows)
+[windows]
+build-ubuntu-2404:
+    pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base ubuntu-2404 -Conf ubuntu-2404 -VmDirName Ubuntu_24.04_64-bit
+# Build REMnux (malware analysis) amd64 VM for VMware Workstation (Windows)
+[windows]
+build-remnux:
+    pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base ubuntu-2404 -Conf remnux -VmDirName REMnux_64-bit
+
+# Build SIFT Workstation (forensics) amd64 VM for VMware Workstation (Windows)
+[windows]
+build-sift:
+    pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base ubuntu-2404 -Conf sift -VmDirName SIFT_64-bit

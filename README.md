@@ -28,27 +28,32 @@ Each build ends with `scripts/qcow2-to-fusion.sh`, which converts the disk to VM
 
 ## Instructions on Windows
 
-To get started install VMware Workstation, [packer][pai] and git. My recommendation is to install git with the command **winget**. Run the following in a Windows Terminal:
+Install VMware Workstation, [packer][pai], [just][just] and git, for example with **winget**. Run the following in a Windows Terminal:
 
-```bash
-winget install Git.Git
+```powershell
+winget install Git.Git Casey.Just Hashicorp.Packer
 ```
 
-You have to add *C:\Program Files\Git\bin* to the Path environment variable. Also make sure that you have VMware in the path, *C:\Program Files (x86)\VMware\VMware Workstation*.
+Make sure `packer`, `just` and `vmrun` (*C:\Program Files\VMware\VMware Workstation*) are in the Path. PowerShell 7 (`pwsh`) is required.
 
-Then start a new terminal and change to folder where you like to check out the repo. Then use git to check it out and configure some defaults.
+Then start a new terminal, check out the repo and configure some defaults (VM and shared folder locations; the directories must exist).
 
-```bash
+```powershell
 git clone https://github.com/reuteras/packer.git
 cd packer
-# Open and configure the default values
 <editor> defaults.ps1
 ```
 
-To build a VM use **cd** to change to the folder for base image you would like to use. The following are available for Windows
+Build a VM from its folder with just:
 
-- packer-kali
-- packer-ubuntu
+```powershell
+cd packer-debian
+just build-debian
+```
+
+Available recipes on Windows (amd64): `packer-debian`: `build-debian`, `packer-kali`: `build-kali`, `packer-ubuntu`: `build-ubuntu-2404`, `build-remnux`, `build-sift`.
+
+Each recipe runs `scripts/build-vm.ps1`, which runs `packer init` and `packer build`, moves the VM to the folder set in *defaults.ps1*, adds the shared folders, takes a `Secure` snapshot and opens the VM.
 
 ## packerconfig.pkr.hcl
 
@@ -94,4 +99,5 @@ There will be bugs so please file a report when you find them.
 <a href="https://www.buymeacoffee.com/reuteras" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
   [pai]: https://www.packer.io/downloads
+  [just]: https://github.com/casey/just
   [pbe]: https://www.vgemba.net/vmware/Packer-Workstation-Error
