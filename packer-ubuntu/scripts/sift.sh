@@ -11,6 +11,10 @@ SIFT_USER="${SIFT_USER:-malware}"
 SIFT_STRICT="${SIFT_STRICT:-0}"
 
 export CHECKPOINT_DISABLE=1
+# Packer runs this with "sudo -E", which keeps HOME=/home/$SIFT_USER. Salt
+# states that run as root would then create root-owned files in the user's
+# home (e.g. ~/.local), which breaks later per-user steps like pipx and r2pm.
+export HOME=/root
 export DEBIAN_FRONTEND=noninteractive
 
 case "$(dpkg --print-architecture)" in
@@ -30,7 +34,20 @@ wget --quiet -O "$tmp_dir/$deb" "https://github.com/ekristen/cast/releases/downl
 echo "$CAST_SHA256  $tmp_dir/$deb" | sha256sum --check --strict
 dpkg -i "$tmp_dir/$deb"
 
+user_home=$(getent passwd "$SIFT_USER" | cut -d: -f6)
+
+# Warn about root-owned files in the user's home; they break per-user tools.
+check_home_ownership() {
+	local root_owned
+	root_owned=$(find "$user_home" -user root 2>/dev/null | head -20)
+	if [[ -n "$root_owned" ]]; then
+		echo "WARNING: root-owned files in $user_home:"
+		echo "$root_owned"
+	fi
+}
+
 if cast install --user="$SIFT_USER" "teamdfir/sift-saltstack@${SIFT_VERSION}"; then
+	check_home_ownership
 	exit 0
 fi
 
@@ -45,14 +62,28 @@ import yaml
 
 with open(sys.argv[1]) as f:
     results = (yaml.safe_load(f) or {}).get("local", {})
-failed = [r for r in results.values() if isinstance(r, dict) and r.get("result") is False]
-for r in sorted(failed, key=lambda r: r.get("__run_num__", 0)):
-    comment = " ".join(str(r.get("comment", "")).split())[:200]
+failed = sorted(
+    (r for r in results.values() if isinstance(r, dict) and r.get("result") is False),
+    key=lambda r: r.get("__run_num__", 0),
+)
+knock_on = [r for r in failed if str(r.get("comment", "")).startswith("One or more requisite failed")]
+root = [r for r in failed if r not in knock_on]
+for r in root:
+    comment = " ".join(str(r.get("comment", "")).split())
     print(f"  [{r.get('__sls__', '?')}] {r.get('__id__', '?')}: {comment}")
-print(f"{len(failed)} of {len(results)} states failed.")
+    changes = r.get("changes")
+    if isinstance(changes, dict) and "retcode" in changes:
+        output = str(changes.get("stderr") or changes.get("stdout") or "").splitlines()
+        print(f"    exit code {changes['retcode']}, last lines of output:")
+        for line in output[-20:]:
+            print(f"      {line}")
+if knock_on:
+    print(f"  ...and {len(knock_on)} states skipped because of the failures above:")
+    print("     " + ", ".join(sorted({r.get("__sls__", "?") for r in knock_on})))
+print(f"{len(failed)} of {len(results)} states failed ({len(root)} root causes).")
 PY
 
-user_home=$(getent passwd "$SIFT_USER" | cut -d: -f6)
+check_home_ownership
 mkdir -p "$user_home/sift-install-logs"
 cp "$log_dir"/* "$user_home/sift-install-logs/" || true
 chown -R "$SIFT_USER:" "$user_home/sift-install-logs"
