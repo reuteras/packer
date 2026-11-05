@@ -1,31 +1,37 @@
 export CHECKPOINT_DISABLE := env("CHECKPOINT_DISABLE", "1")
 
+# Build the default VM (Ubuntu 24.04 arm64)
 default: build-ubuntu-2404-arm-qemu
 
-# arm64 builds use QEMU (hvf) and are converted to VMware Fusion VMs.
+# Build Ubuntu 24.04 desktop arm64 VM for VMware Fusion
 [working-directory('ubuntu-2404-arm-qemu')]
 build-ubuntu-2404-arm-qemu:
     packer init ubuntu-2404-arm-qemu.pkr.hcl
     packer build -force -var-file ../variables-ubuntu-2404-arm.pkr.hcl ubuntu-2404-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh Ubuntu_24.04_64-bit_arm Ubuntu_24.04_64-bit_arm 8192 2 arm-ubuntu-64
 
+# Build REMnux (malware analysis) on Ubuntu 24.04 arm64
 [working-directory('remnux-arm-qemu')]
 build-remnux-arm-qemu:
     packer init remnux-arm-qemu.pkr.hcl
     packer build -force -var-file ../variables-ubuntu-2404-arm.pkr.hcl remnux-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh REMnux_arm64 REMnux_arm64 8192 4 arm-ubuntu-64
 
+# Build SIFT Workstation (forensics) on Ubuntu 24.04 arm64
 [working-directory('sift-arm-qemu')]
 build-sift-arm-qemu:
     packer init sift-arm-qemu.pkr.hcl
     packer build -force -var-file ../variables-ubuntu-2404-arm.pkr.hcl sift-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh SIFT_arm64 SIFT_arm64 8192 4 arm-ubuntu-64
 
+# Move built VMs to the Fusion VM folder and open them
 install:
     ../bin/install.sh
 
+# Remove build output
 clean:
     rm -rf ubuntu-2404-arm-qemu/Ubuntu_24.04_64-bit_arm remnux-arm-qemu/REMnux_arm64 sift-arm-qemu/SIFT_arm64
 
+# Remove build output and the packer ISO cache
 dist-clean: clean
     rm -rf packer_cache

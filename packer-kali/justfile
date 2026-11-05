@@ -1,18 +1,23 @@
 export CHECKPOINT_DISABLE := env("CHECKPOINT_DISABLE", "1")
 
+# Build the default VM (Kali arm64)
 default: build-kali-arm-qemu
 
+# Build Kali Linux arm64 VM for VMware Fusion
 [working-directory('kali-arm-qemu')]
 build-kali-arm-qemu:
     packer init kali-arm-qemu.pkr.hcl
     packer build -force -var-file ../variables-kali-arm.pkr.hcl kali-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh Kali_64-bit_arm Kali_64-bit_arm 8192 2 arm-debian13-64
 
+# Move built VMs to the Fusion VM folder and open them
 install:
     ../bin/install.sh
 
+# Remove build output
 clean:
     rm -rf kali-arm-qemu/Kali_64-bit_arm
 
+# Remove build output and the packer ISO cache
 dist-clean: clean
     rm -rf packer_cache
