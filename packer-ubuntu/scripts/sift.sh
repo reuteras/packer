@@ -7,6 +7,8 @@ CAST_SHA256_ARM64="b527fd8592af2520ddd3457cba9538c7e80013b8c58174ab402ac69c03a0c
 CAST_SHA256_AMD64="9775d46a42f77030407cd3ba37d5f32334d50e0d4b021ece113c23cbea2c7573"
 SIFT_VERSION="v2026.10.19"
 SIFT_USER="${SIFT_USER:-malware}"
+# Set SIFT_STRICT=1 to fail the build if any SIFT salt state fails.
+SIFT_STRICT="${SIFT_STRICT:-0}"
 
 export CHECKPOINT_DISABLE=1
 export DEBIAN_FRONTEND=noninteractive
@@ -28,4 +30,34 @@ wget --quiet -O "$tmp_dir/$deb" "https://github.com/ekristen/cast/releases/downl
 echo "$CAST_SHA256  $tmp_dir/$deb" | sha256sum --check --strict
 dpkg -i "$tmp_dir/$deb"
 
-cast install --user="$SIFT_USER" "teamdfir/sift-saltstack@${SIFT_VERSION}"
+if cast install --user="$SIFT_USER" "teamdfir/sift-saltstack@${SIFT_VERSION}"; then
+	exit 0
+fi
+
+# SIFT pulls many third-party downloads and some break between releases.
+# List every failed state and keep the logs instead of discarding the VM.
+set +x
+log_dir=/var/cache/cast/installer/logs
+echo "SIFT installation finished with failed states:"
+python3 - "$log_dir/results.yaml" <<'PY' || true
+import sys
+import yaml
+
+with open(sys.argv[1]) as f:
+    results = (yaml.safe_load(f) or {}).get("local", {})
+failed = [r for r in results.values() if isinstance(r, dict) and r.get("result") is False]
+for r in sorted(failed, key=lambda r: r.get("__run_num__", 0)):
+    comment = " ".join(str(r.get("comment", "")).split())[:200]
+    print(f"  [{r.get('__sls__', '?')}] {r.get('__id__', '?')}: {comment}")
+print(f"{len(failed)} of {len(results)} states failed.")
+PY
+
+user_home=$(getent passwd "$SIFT_USER" | cut -d: -f6)
+mkdir -p "$user_home/sift-install-logs"
+cp "$log_dir"/* "$user_home/sift-install-logs/" || true
+chown -R "$SIFT_USER:" "$user_home/sift-install-logs"
+echo "Logs copied to $user_home/sift-install-logs."
+
+if [[ "$SIFT_STRICT" == "1" ]]; then
+	exit 1
+fi
