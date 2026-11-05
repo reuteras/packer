@@ -1,3 +1,5 @@
+set windows-shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
+
 export CHECKPOINT_DISABLE := env("CHECKPOINT_DISABLE", "1")
 
 # Build the default VM (Debian 13 arm64)
@@ -24,6 +26,12 @@ build-arkime-arm-qemu:
     packer build -force -var-file ../variables-debian-arm.pkr.hcl arkime-arm-qemu.pkr.hcl
     ../../scripts/qcow2-to-fusion.sh Arkime_Debian_64-bit Arkime_Debian_64-bit 16384 4 arm-debian13-64
 
-# Move built VMs to the Fusion VM folder and open them
+# Move built VMs to the Fusion VM folder and open them (macOS only; Windows builds install themselves)
+[macos]
 install:
     ../bin/install.sh
+
+# Build Debian 13 amd64 VM for VMware Workstation (Windows)
+[windows]
+build-debian:
+    pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base debian -Conf debian -VmDirName Debian_64-bit

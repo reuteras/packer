@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    vmware = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/vmware"
+    }
+  }
+}
+
 variable "cpus" {
   type    = string
   default = "2"
@@ -63,23 +72,24 @@ source "vmware-iso" "ubuntu" {
     "./http/meta-data",
     "./http/user-data"
   ]
-  cd_label         = "cidata"
-  disk_size        = "${var.disk_size}"
-  guest_os_type    = "ubuntu-64"
-  headless         = "${var.headless}"
-  iso_checksum     = "${var.iso_checksum_ubuntu}"
-  iso_urls         = "${var.iso_urls_ubuntu}"
-  output_directory = "${var.vm_name}"
-  shutdown_command = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
-  ssh_password     = "${var.ssh_password}"
-  ssh_port         = 22
-  ssh_timeout      = "8000s"
-  ssh_username     = "${var.ssh_username}"
-  vm_name          = "${var.vm_name}"
-  memory           = "${var.memory}"
-  cpus             = "${var.cpus}"
-  usb              = "true"
-  snapshot_name    = "Installed"
+  cd_label             = "cidata"
+  disk_size            = "${var.disk_size}"
+  guest_os_type        = "ubuntu-64"
+  headless             = "${var.headless}"
+  iso_checksum         = "${var.iso_checksum_ubuntu}"
+  iso_urls             = "${var.iso_urls_ubuntu}"
+  output_directory     = "${var.vm_name}"
+  shutdown_command     = "echo '${var.ssh_password}' | sudo -S shutdown -P now"
+  ssh_password         = "${var.ssh_password}"
+  ssh_port             = 22
+  ssh_timeout          = "8000s"
+  ssh_username         = "${var.ssh_username}"
+  vm_name              = "${var.vm_name}"
+  network_adapter_type = "vmxnet3"
+  memory               = "${var.memory}"
+  cpus                 = "${var.cpus}"
+  usb                  = "true"
+  snapshot_name        = "Installed"
   vmx_data = {
     "annotation" : "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.ssh_username}|0D|0APassword: ${var.ssh_password}",
   }
