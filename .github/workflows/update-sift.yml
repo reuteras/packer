@@ -6,7 +6,7 @@ on:
     - cron: "23 5 * * *"
   workflow_dispatch:
 
-permissions: { }
+permissions: {} # yamllint disable-line rule:braces
 
 jobs:
   update:
