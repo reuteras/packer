@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034 # variables are used by scripts/vmware-lib.sh
 # Default location for virtual machines (Linux + VMware Workstation Pro)
 # Change the values below for your environment. You have to create the directories.
 # Sourced by scripts/vmware-lib.sh - do not execute directly.

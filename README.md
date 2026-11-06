@@ -115,7 +115,8 @@ If you have problems building with Packer with VMware Workstation 16 read the bl
 
 ### Secure Boot blocks vmmon/vmnet on Linux
 
-If `vmware.service` fails to start (`systemctl status vmware` shows "Virtual machine monitor - failed" and/or "Virtual ethernet - failed") and Secure Boot is enabled (`mokutil --sb-state`), the kernel is refusing to load the unsigned `vmmon`/`vmnet` modules VMware built for your kernel. Sign them with your own key and enroll it via MOK. This is a one-time setup, but the modules must be re-signed after every kernel upgrade that rebuilds them.
+If `vmware.service` fails to start (`systemctl status vmware` shows "Virtual machine monitor - failed" and/or "Virtual ethernet - failed") and Secure Boot is enabled (`mokutil --sb-state`), the kernel is refusing to load the unsigned `vmmon`/`vmnet` modules VMware built for your kernel.
+Sign them with your own key and enroll it via MOK. This is a one-time setup, but the modules must be re-signed after every kernel upgrade that rebuilds them.
 
 ```bash
 sudo -i bash
