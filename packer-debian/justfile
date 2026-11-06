@@ -35,3 +35,8 @@ install:
 [windows]
 build-debian:
     pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base debian -Conf debian -VmDirName Debian_64-bit
+
+# Build Debian 13 amd64 VM for VMware Workstation Pro (Linux)
+[linux]
+build-debian:
+    ../scripts/build-vm.sh debian debian Debian_64-bit

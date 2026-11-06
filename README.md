@@ -1,6 +1,6 @@
 # Packer
 
-This repo contains scripts and configuration to build virtual machines on macOS and Windows with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested.
+This repo contains scripts and configuration to build virtual machines on macOS, Windows and Linux with the help of packer and VMware. At the moment I don't have a macOS machine with an Intel processor so those scripts are not tested.
 
 ## Instructions on macOS (Apple Silicon)
 
@@ -55,6 +55,29 @@ Available recipes on Windows (amd64): `packer-debian`: `build-debian`, `packer-k
 
 Each recipe runs `scripts/build-vm.ps1`, which runs `packer init` and `packer build`, moves the VM to the folder set in *defaults.ps1*, adds the shared folders, takes a `Secure` snapshot and opens the VM.
 
+## Instructions on Linux
+
+Install VMware Workstation Pro, [packer][pai] and [just][just] (`vmrun` and `vmware` must end up on your `$PATH`; the Workstation installer normally puts them in `/usr/bin`).
+
+Then check out the repo and configure some defaults (VM and shared folder locations; the directories must exist).
+
+```bash
+git clone https://github.com/reuteras/packer.git
+cd packer
+<editor> defaults.sh
+```
+
+Build a VM from its folder with just:
+
+```bash
+cd packer-debian
+just build-debian
+```
+
+Available recipes on Linux (amd64): `packer-debian`: `build-debian`, `packer-kali`: `build-kali`, `packer-ubuntu`: `build-ubuntu-2404`, `build-remnux`, `build-sift`.
+
+Each recipe runs `scripts/build-vm.sh`, which runs `packer init` and `packer build`, moves the VM to the folder set in *defaults.sh*, adds the shared folders, takes a `Secure` snapshot and opens the VM. This mirrors the Windows flow (`build-vm.ps1`), just with `vmrun -T ws` / `vmware` invoked from bash instead of PowerShell.
+
 ## packerconfig.pkr.hcl
 
 My *packerconfig.pkr.hcl* file contains the following.
@@ -89,6 +112,42 @@ If you have problems building with Packer with VMware Workstation 16 read the bl
 - In Workstation go to Edit...Virtual Network Editor
 - Click Change Settings
 - Don’t change anything, just click OK
+
+### Secure Boot blocks vmmon/vmnet on Linux
+
+If `vmware.service` fails to start (`systemctl status vmware` shows "Virtual machine monitor - failed" and/or "Virtual ethernet - failed") and Secure Boot is enabled (`mokutil --sb-state`), the kernel is refusing to load the unsigned `vmmon`/`vmnet` modules VMware built for your kernel. Sign them with your own key and enroll it via MOK. This is a one-time setup, but the modules must be re-signed after every kernel upgrade that rebuilds them.
+
+```bash
+sudo -i bash
+mkdir -p /root/module-signing
+cd /root/module-signing
+openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=VMware module signing key/"
+mokutil --import MOK.der          # sets an enrollment password
+reboot
+```
+
+At boot, the blue MokManager screen appears -> "Enroll MOK" -> enter the password -> confirm.
+
+After reboot, check that the installed kernel headers actually match the **running** kernel - if a kernel update landed at the same reboot (common with unattended-upgrades), they won't, `sign-file` won't exist yet, and VMware won't have built `vmmon.ko`/`vmnet.ko` for the new kernel either:
+
+```bash
+uname -r                                     # running kernel
+dpkg -l | grep linux-headers                 # must include a line matching `uname -r`
+sudo apt install linux-headers-$(uname -r)   # if it's missing
+sudo vmware-modconfig --console --install-all # rebuilds vmmon.ko/vmnet.ko for this kernel
+```
+
+Then sign and load the (now present, matching) modules:
+
+```bash
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
+  /root/module-signing/MOK.priv /root/module-signing/MOK.der /lib/modules/$(uname -r)/misc/vmmon.ko
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
+  /root/module-signing/MOK.priv /root/module-signing/MOK.der /lib/modules/$(uname -r)/misc/vmnet.ko
+
+sudo modprobe vmmon vmnet
+sudo systemctl start vmware
+```
 
 ## Bugs
 

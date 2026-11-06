@@ -54,3 +54,18 @@ build-remnux:
 [windows]
 build-sift:
     pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base ubuntu-2404 -Conf sift -VmDirName SIFT_64-bit
+
+# Build Ubuntu 24.04 amd64 VM for VMware Workstation Pro (Linux)
+[linux]
+build-ubuntu-2404:
+    ../scripts/build-vm.sh ubuntu-2404 ubuntu-2404 Ubuntu_24.04_64-bit
+
+# Build REMnux (malware analysis) amd64 VM for VMware Workstation Pro (Linux)
+[linux]
+build-remnux:
+    ../scripts/build-vm.sh ubuntu-2404 remnux REMnux_64-bit
+
+# Build SIFT Workstation (forensics) amd64 VM for VMware Workstation Pro (Linux)
+[linux]
+build-sift:
+    ../scripts/build-vm.sh ubuntu-2404 sift SIFT_64-bit

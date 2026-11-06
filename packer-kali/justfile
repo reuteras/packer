@@ -31,3 +31,8 @@ dist-clean: clean
 [windows]
 build-kali:
     pwsh -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-vm.ps1 -Base kali -Conf kali -VmDirName Kali
+
+# Build Kali Linux amd64 VM for VMware Workstation Pro (Linux)
+[linux]
+build-kali:
+    ../scripts/build-vm.sh kali kali Kali
